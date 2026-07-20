@@ -1,0 +1,135 @@
+<style>
+  .lp-pb {
+    background: linear-gradient(180deg, #EBF6FA 0%, #D6EEF5 100%);
+    border: 1px solid #c9e3eb;
+    border-radius: 14px;
+    padding: 18px 18px 16px;
+    margin: 4px 0 14px;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    display: grid;
+    gap: 10px;
+  }
+  .lp-pb__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .lp-pb__title {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--lp-text, #2E3F45);
+    letter-spacing: 0.02em;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .lp-pb__off {
+    background: var(--lp-text, #2E3F45);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+  }
+  .lp-pb__free {
+    background: #1f8a55;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 5px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+  .lp-pb__price {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--lp-text, #2E3F45);
+    line-height: 1;
+    text-align: right;
+  }
+  .lp-pb__compare {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--lp-text-soft, #6B7E85);
+    text-decoration: line-through;
+    margin-top: 4px;
+    display: block;
+  }
+  .lp-pb__sub {
+    font-size: 13px;
+    color: var(--lp-text-soft, #6B7E85);
+    margin: 0;
+  }
+  .lp-pb__sub strong { color: var(--lp-text, #2E3F45); font-weight: 700; }
+  .lp-pb__shipping {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: linear-gradient(90deg, #0f7a3e 0%, #1aaa58 100%);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 6px 12px;
+    border-radius: 8px;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(15,122,62,0.30);
+  }
+  .lp-pb__shipping-icon {
+    font-size: 16px;
+    line-height: 1;
+    animation: lp-truck 1.8s ease-in-out infinite;
+    display: inline-block;
+  }
+  @keyframes lp-truck {
+    0%, 100% { transform: translateX(0); }
+    40%       { transform: translateX(4px); }
+    60%       { transform: translateX(2px); }
+  }
+  .lp-pb__shipping-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .lp-pb__shipping-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .lp-pb__shipping-days {
+    font-size: 10px;
+    font-weight: 600;
+    opacity: 0.88;
+    line-height: 1;
+  }
+</style>
+
+<div class="lp-pb">
+  <div class="lp-pb__row">
+    <p class="lp-pb__title">EXTRACTOR LUNEA <span class="lp-pb__off">34% OFF</span></p>
+    <span class="lp-pb__free">ENVÍO GRATIS</span>
+  </div>
+  <div class="lp-pb__row">
+    <p class="lp-pb__sub"><strong>Pagas cuando lo recibes</strong> · Compra 100% segura</p>
+    <div>
+      <span class="lp-pb__price">$219.000</span>
+      <span class="lp-pb__compare">$329.900</span>
+    </div>
+  </div>
+  <div>
+    <span class="lp-pb__shipping">
+      <span class="lp-pb__shipping-icon">🚚</span>
+      <span class="lp-pb__shipping-lines">
+        <span class="lp-pb__shipping-label">Envío Ultra Rápido</span>
+        <span class="lp-pb__shipping-days">Llega en 1 a 5 días hábiles</span>
+      </span>
+    </span>
+  </div>
+</div>

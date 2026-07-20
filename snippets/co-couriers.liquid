@@ -1,0 +1,20 @@
+{%- comment -%}
+  ES · Transportadoras inline en el cuadro de compra (debajo del botón).
+  "Enviamos con:" + nombres en cuadros chicos. Self-contained (sin logos externos).
+{%- endcomment -%}
+<div class="co-couriers">
+  <p class="co-couriers__title">Enviamos con:</p>
+  <div class="co-couriers__row">
+    <div class="co-couriers__box"><span>SEUR</span></div>
+    <div class="co-couriers__box"><span>Correos Express</span></div>
+    <div class="co-couriers__box"><span>MRW</span></div>
+    <div class="co-couriers__box"><span>GLS</span></div>
+  </div>
+</div>
+<style>
+  .co-couriers { margin: 14px 0 4px; }
+  .co-couriers__title { font-family: var(--lp-font-body, system-ui, sans-serif); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--lp-text-soft, #6B7E85); margin: 0 0 8px; text-align: center; }
+  .co-couriers__row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; }
+  .co-couriers__box { display: flex; align-items: center; justify-content: center; min-width: 78px; height: 40px; padding: 6px 12px; background: #fff; border: 1px solid var(--lp-border, #e4e8ea); border-radius: 10px; }
+  .co-couriers__box span { font-family: var(--lp-font-body, system-ui, sans-serif); font-size: 12px; font-weight: 600; color: var(--lp-text, #2E3F45); white-space: nowrap; }
+</style>

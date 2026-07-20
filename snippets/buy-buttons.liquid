@@ -1,0 +1,945 @@
+{% comment %}
+  Renders product buy-buttons.
+  Accepts:
+  - product: {Object} product object.
+  - block: {Object} passing the block information.
+  - product_form_id: {String} product form id.
+  - section_id: {String} id of section to which this snippet belongs.
+  - show_pickup_availability: {Boolean} for the pickup availability. If true the pickup availability is rendered, false - not rendered (optional).
+
+  Usage:
+  {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true %}
+{% endcomment %}
+<div {{ block.shopify_attributes }}>
+
+  {%- comment -%} ══ ENZIMAS: override colores + auto-slide + sección stats (inyectado vía snippet porque el template JSON no sincroniza) ══ {%- endcomment -%}
+  {%- if product.handle == 'physicians-choice-enzimas-digestivas' -%}
+    <style>
+      /* ── Precio principal más grande y en rojo ── */
+      html body .price__sale .price-item--sale, html body .price .price-item--sale { font-size: 34px !important; font-weight: 800 !important; color: #B22222 !important; line-height: 1.05 !important; }
+      html body .price__sale .price-item--regular, html body .price s .price-item { font-size: 19px !important; color: #999 !important; }
+      html body .price__badge-sale, html body .price .badge { background: #B22222 !important; color: #fff !important; font-weight: 700 !important; }
+      html body .lp-hook__eyebrow, html body .lp-features__eyebrow, html body .lp-faq__eyebrow, html body .lp-rr__eyebrow { color: #B22222 !important; }
+      html body .lp-hook { background: linear-gradient(180deg, #fff 0%, #FEF3F3 100%) !important; }
+      html body .lp-hook__title em { color: #B22222 !important; }
+      html body .lp-trust-row { background: #FEF3F3 !important; border-color: #F0C0C0 !important; }
+      html body .lp-features__icon { background: #FEF3F3 !important; }
+      html body .lp-features__card:hover { border-color: #B22222 !important; }
+      html body .lp-howto { background: linear-gradient(135deg, #4a1010 0%, #6B1515 100%) !important; }
+      html body .lp-howto__num { background: #FFCECE !important; color: #6B1515 !important; }
+      html body .lp-howto__eyebrow { color: #FFCECE !important; }
+      html body .lp-guarantee { background: #FEF3F3 !important; }
+      html body .lp-guarantee__seal { background: radial-gradient(circle at 30% 30%, #FFCECE, #B22222) !important; box-shadow: 0 6px 20px rgba(178,34,34,0.3) !important; }
+      html body .lp-guarantee__title { color: #B22222 !important; }
+      html body .lp-included__icon { background: #FEF3F3 !important; }
+      html body .lp-included__check { background: #B22222 !important; }
+      html body .lp-rr__container { background: #FEF3F3 !important; }
+      html body .lp-rr__verified { color: #B22222 !important; }
+      html body .lp-rr__verified::before { background: #B22222 !important; }
+      html body .lp-rr__title em { color: #B22222 !important; }
+      html body .lp-foryou { background: linear-gradient(135deg, #4a1010 0%, #6B1515 100%) !important; }
+      html body .lp-foryou__item::before { background: #FFCECE !important; color: #B22222 !important; }
+      html body .lp-foryou__cta-eyebrow { color: #FFCECE !important; }
+      html body .lp-foryou__cta-btn { background: #FFCECE !important; color: #6B1515 !important; }
+      html body .lp-foryou__cta-btn:hover { background: #fff !important; color: #6B1515 !important; }
+      html body .lp-faq__icon { background: #FEF3F3 !important; color: #B22222 !important; }
+      html body .lp-faq__item[open] { border-color: #B22222 !important; }
+      html body .lp-faq__item[open] .lp-faq__icon { background: #B22222 !important; color: #fff !important; }
+      html body .lp-bcta { background: linear-gradient(160deg, #6B1515 0%, #B22222 100%) !important; }
+      html body .lp-bcta__title em { color: #FFD5D5 !important; }
+      html body .lp-bcta__btn { color: #6B1515 !important; }
+      html body .lp-sticky-atc__price { color: #B22222 !important; }
+      html body .lp-sticky-atc__btn:hover { background: #B22222 !important; color: #fff !important; }
+      html body .lp-wa-btn { background: #B22222 !important; box-shadow: 0 2px 8px rgba(178,34,34,0.35) !important; }
+      html body .lp-wa-btn:hover { background: #8B1A1A !important; }
+
+      /* ── Transición suave entre imágenes del producto ── */
+      .product__media-item img, .product-media-container img, .product__media img {
+        transition: opacity 0.6s ease !important;
+      }
+
+      /* ── Sección stats / porcentajes ── */
+      .ez-stats { background:#fff; padding:48px 20px; }
+      .ez-stats__inner { max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1.2fr; gap:40px; align-items:center; }
+      @media (max-width:749px){ .ez-stats__inner{ grid-template-columns:1fr; gap:28px; } }
+      .ez-stats__title { font-family:'DM Sans',system-ui,sans-serif; font-size:clamp(28px,4vw,40px); font-weight:800; color:#1a2e35; line-height:1.15; margin:0 0 14px; }
+      .ez-stats__sub { font-family:'DM Sans',system-ui,sans-serif; font-size:16px; font-style:italic; color:#6B7E85; margin:0; }
+      .ez-stats__rows { display:flex; flex-direction:column; }
+      .ez-stat { display:flex; align-items:center; gap:20px; padding:20px 0; border-top:1px solid #eee; }
+      .ez-stat:first-child { border-top:none; }
+      .ez-stat__ring { width:78px; height:78px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+      .ez-stat__ring--91 { background:conic-gradient(#B22222 0% 91%, #f0dede 91% 100%); }
+      .ez-stat__ring--94 { background:conic-gradient(#B22222 0% 94%, #f0dede 94% 100%); }
+      .ez-stat__ring--87 { background:conic-gradient(#B22222 0% 87%, #f0dede 87% 100%); }
+      .ez-stat__ring-inner { width:60px; height:60px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; font-family:'DM Sans',system-ui,sans-serif; font-size:17px; font-weight:800; color:#B22222; }
+      .ez-stat__text { font-family:'DM Sans',system-ui,sans-serif; font-size:17px; color:#2E3F45; line-height:1.4; margin:0; }
+      .ez-stat__text strong { color:#1a2e35; }
+      .ez-stats__foot { font-family:'DM Sans',system-ui,sans-serif; font-size:13px; color:#9aa; margin:18px 0 0; grid-column:1/-1; text-align:center; }
+    </style>
+
+    <template id="ez-stats-tpl">
+      <section class="ez-stats">
+        <div class="ez-stats__inner">
+          <div>
+            <h2 class="ez-stats__title">No son promesas,<br>son porcentajes</h2>
+            <p class="ez-stats__sub">Personas que reportaron mejoras tras uso constante:</p>
+          </div>
+          <div class="ez-stats__rows">
+            <div class="ez-stat">
+              <div class="ez-stat__ring ez-stat__ring--91"><div class="ez-stat__ring-inner">91%</div></div>
+              <p class="ez-stat__text">Notó <strong>menos hinchazón</strong> y vientre más plano después de las comidas</p>
+            </div>
+            <div class="ez-stat">
+              <div class="ez-stat__ring ez-stat__ring--94"><div class="ez-stat__ring-inner">94%</div></div>
+              <p class="ez-stat__text">Reportó poder <strong>comer alimentos</strong> que antes evitaba sin molestias</p>
+            </div>
+            <div class="ez-stat">
+              <div class="ez-stat__ring ez-stat__ring--87"><div class="ez-stat__ring-inner">87%</div></div>
+              <p class="ez-stat__text">Sintió <strong>más energía</strong> después de comer y mejor regularidad intestinal</p>
+            </div>
+          </div>
+          <p class="ez-stats__foot">Resultados basados en una encuesta voluntaria de clientes realizada 2025.</p>
+        </div>
+      </section>
+    </template>
+
+    <template id="ez-extra-reviews-tpl">
+      <div class="lp-rr__card"><div class="lp-rr__media"><span class="lp-rr__tag">✦ COMPRA VERIFICADA</span><img src="https://cdn.shopify.com/s/files/1/0811/0984/4194/files/f46d9d19-f097-4159-b686-868a181bcad3.webp" alt="Reseña" loading="lazy"></div><div class="lp-rr__body"><div class="lp-rr__top-row"><span class="lp-rr__stars">★★★★★</span><span class="lp-rr__verified">Verificada</span></div><p class="lp-rr__quote">"La tomo antes de cada almuerzo y ya no siento esa pesadez"</p><p class="lp-rr__text">Trabajo desde casa y almorzaba fuerte todos los días — y todas las tardes terminaba tirada en el sofá sin poder concentrarme. Pensé que era normal hasta que empecé con estas enzimas. La diferencia fue gradual pero clara: menos pesadez, más energía en las tardes, y el abdomen ya no se me infla como antes. Lo que más me convenció fue la combinación — enzimas más probióticos más prebióticos en una sola cápsula. Lleva dos meses conmigo y lo sigo tomando.</p><div class="lp-rr__footer"><span class="lp-rr__avatar">SL</span><div class="lp-rr__person"><p class="lp-rr__name">Sofía L. · Medellín</p><p class="lp-rr__compra">Compra verificada</p></div></div></div></div>
+      <div class="lp-rr__card"><div class="lp-rr__media"><span class="lp-rr__tag">✦ RESULTADO REAL</span><img src="https://cdn.shopify.com/s/files/1/0811/0984/4194/files/2fe7ca4d-e5ec-4eae-9991-0bca498365a3.webp" alt="Reseña" loading="lazy"></div><div class="lp-rr__body"><div class="lp-rr__top-row"><span class="lp-rr__stars">★★★★★</span><span class="lp-rr__verified">Verificada</span></div><p class="lp-rr__quote">"Después de años con problemas digestivos por fin encontré algo que funciona"</p><p class="lp-rr__text">Tengo más de 40 años lidiando con una digestión difícil. Gases, inflamación, colon irritable según algunos médicos. Probé de todo — dietas, medicamentos, tés. Physician's Choice lo encontré recomendado en un grupo de salud y lo pedí sin mucha expectativa. Al mes de uso noté que los episodios de inflamación se redujeron bastante. Me da confianza que la fórmula está desarrollada con médicos. Es lo más completo que tomé.</p><div class="lp-rr__footer"><span class="lp-rr__avatar">PV</span><div class="lp-rr__person"><p class="lp-rr__name">Patricia V. · Cali</p><p class="lp-rr__compra">Compra verificada</p></div></div></div></div>
+      <div class="lp-rr__card"><div class="lp-rr__media"><span class="lp-rr__tag">✦ FOTO REAL</span><img src="https://cdn.shopify.com/s/files/1/0811/0984/4194/files/af99f8c5-5533-40ef-a01d-c947a98cea32.webp" alt="Reseña" loading="lazy"></div><div class="lp-rr__body"><div class="lp-rr__top-row"><span class="lp-rr__stars">★★★★★</span><span class="lp-rr__verified">Verificada</span></div><p class="lp-rr__quote">"Lo recomendé a toda mi familia y todos notaron la diferencia"</p><p class="lp-rr__text">Empecé a tomarlo yo primero porque tenía problemas de hinchazón después de las comidas principales. En tres semanas ya notaba mejora. Convencí a mi esposo que sufría de acidez y a mi mamá con problemas intestinales crónicos. Los tres lo tomamos hace cuatro meses. Mi esposo dejó el antiácido que tomaba todos los días. El precio es muy accesible y el servicio fue excelente.</p><div class="lp-rr__footer"><span class="lp-rr__avatar">MO</span><div class="lp-rr__person"><p class="lp-rr__name">Margarita O. · Bucaramanga</p><p class="lp-rr__compra">Compra verificada</p></div></div></div></div>
+      <div class="lp-rr__card"><div class="lp-rr__media"><span class="lp-rr__tag">✦ COMPRA VERIFICADA</span><img src="https://cdn.shopify.com/s/files/1/0811/0984/4194/files/13cd7b6c-2805-4814-b718-7df249a67ae0_5a7b0017-20bd-4c77-949d-77ee72869c5d.webp" alt="Reseña" loading="lazy"></div><div class="lp-rr__body"><div class="lp-rr__top-row"><span class="lp-rr__stars">★★★★★</span><span class="lp-rr__verified">Verificada</span></div><p class="lp-rr__quote">"Ideal para los que comen asado y comidas pesadas seguido"</p><p class="lp-rr__text">Soy del tipo que come bien — asado los fines de semana, almuerzo fuerte. Pero los últimos dos años empecé a sentir más el impacto: pesadez, gases, a veces dolor de estómago después de comer carne. Un amigo me habló de estas enzimas y las probé. La diferencia en comidas pesadas es notable — el cuerpo las procesa mejor y el malestar post-comida casi desapareció. Para los que disfrutan comer sin culpa, es una solución práctica.</p><div class="lp-rr__footer"><span class="lp-rr__avatar">RM</span><div class="lp-rr__person"><p class="lp-rr__name">Roberto M. · Medellín</p><p class="lp-rr__compra">Compra verificada</p></div></div></div></div>
+    </template>
+
+    <script>
+    (function(){
+      function run(){
+        // 1. Relocar la sección de stats antes de las reseñas
+        var tpl = document.getElementById('ez-stats-tpl');
+        var reviews = document.querySelector('.lp-rr');
+        if (tpl && reviews && !document.querySelector('.ez-stats')) {
+          reviews.parentNode.insertBefore(tpl.content.cloneNode(true), reviews);
+        }
+        // 1b. Inyectar las 4 reseñas extra al grid
+        var grid = document.querySelector('.lp-rr__grid');
+        var extra = document.getElementById('ez-extra-reviews-tpl');
+        if (grid && extra && !grid.dataset.ezExtra) {
+          grid.dataset.ezExtra = '1';
+          grid.appendChild(extra.content.cloneNode(true));
+        }
+        // 2. Auto-slide de imágenes del producto (sin empujar el scroll)
+        var thumbs = document.querySelectorAll('.thumbnail-list__item button, .thumbnail-list__item a, .product__media-item');
+        if (thumbs.length > 1 && !window.__ezSlide) {
+          window.__ezSlide = true;
+          var i = 0, timer;
+          function clickNoScroll(elm){
+            var sx = window.scrollX, sy = window.scrollY;
+            try { elm.click(); } catch(e){}
+            // Restaurar posición inmediatamente y en los próximos frames
+            window.scrollTo(sx, sy);
+            requestAnimationFrame(function(){ window.scrollTo(sx, sy); });
+            setTimeout(function(){ window.scrollTo(sx, sy); }, 50);
+          }
+          function next(){ i = (i+1) % thumbs.length; clickNoScroll(thumbs[i]); }
+          function start(){ timer = setInterval(next, 5000); }
+          function stop(){ clearInterval(timer); }
+          var wrap = document.querySelector('.product__media-wrapper, .product-media-container, .product__media-list');
+          if (wrap) { wrap.addEventListener('mouseenter', stop); wrap.addEventListener('mouseleave', start); }
+          start();
+        }
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', function(){ setTimeout(run, 800); }); }
+      else { setTimeout(run, 800); }
+    })();
+    </script>
+  {%- endif -%}
+
+  {%- comment -%} ══ ASTAXANTINA: tema bordó/vino en toda la página ══ {%- endcomment -%}
+  {%- if product.handle == 'astaxantina-premium-microingredientes' -%}
+    <style>
+      html body .price__sale .price-item--sale, html body .price .price-item--sale { font-size: 34px !important; font-weight: 800 !important; color: #8C1C3F !important; line-height: 1.05 !important; }
+      html body .price__sale .price-item--regular, html body .price s .price-item { font-size: 19px !important; color: #999 !important; }
+      html body .price__badge-sale, html body .price .badge { background: #8C1C3F !important; color: #fff !important; font-weight: 700 !important; }
+      html body .lp-hook__eyebrow, html body .lp-features__eyebrow, html body .lp-faq__eyebrow, html body .lp-rr__eyebrow { color: #8C1C3F !important; }
+      html body .lp-hook { background: linear-gradient(180deg, #fff 0%, #FBEDF1 100%) !important; }
+      html body .lp-hook__title em { color: #8C1C3F !important; }
+      html body .lp-trust-row { background: #FBEDF1 !important; border-color: #E8C4D0 !important; }
+      html body .lp-features__icon { background: #FBEDF1 !important; }
+      html body .lp-features__card:hover { border-color: #8C1C3F !important; }
+      html body .lp-howto { background: linear-gradient(135deg, #4a0f22 0%, #8C1C3F 100%) !important; }
+      html body .lp-howto__num { background: #F3C9D5 !important; color: #6E1530 !important; }
+      html body .lp-howto__eyebrow { color: #F3C9D5 !important; }
+      html body .lp-guarantee { background: #FBEDF1 !important; }
+      html body .lp-guarantee__seal { background: radial-gradient(circle at 30% 30%, #F3C9D5, #8C1C3F) !important; box-shadow: 0 6px 20px rgba(140,28,63,0.3) !important; }
+      html body .lp-guarantee__title { color: #8C1C3F !important; }
+      html body .lp-included__icon { background: #FBEDF1 !important; }
+      html body .lp-included__check { background: #8C1C3F !important; }
+      html body .lp-rr__container { background: #FBEDF1 !important; }
+      html body .lp-rr__verified { color: #8C1C3F !important; }
+      html body .lp-rr__verified::before { background: #8C1C3F !important; }
+      html body .lp-rr__title em { color: #8C1C3F !important; }
+      html body .lp-foryou { background: linear-gradient(135deg, #4a0f22 0%, #8C1C3F 100%) !important; }
+      html body .lp-foryou__item::before { background: #F3C9D5 !important; color: #6E1530 !important; }
+      html body .lp-foryou__cta-eyebrow { color: #F3C9D5 !important; }
+      html body .lp-foryou__cta-btn { background: #F3C9D5 !important; color: #6E1530 !important; }
+      html body .lp-foryou__cta-btn:hover { background: #fff !important; color: #6E1530 !important; }
+      html body .lp-faq__icon { background: #FBEDF1 !important; color: #8C1C3F !important; }
+      html body .lp-faq__item[open] { border-color: #8C1C3F !important; }
+      html body .lp-faq__item[open] .lp-faq__icon { background: #8C1C3F !important; color: #fff !important; }
+      html body .lp-bcta { background: linear-gradient(160deg, #6E1530 0%, #8C1C3F 100%) !important; }
+      html body .lp-bcta__title em { color: #F3C9D5 !important; }
+      html body .lp-bcta__btn { color: #8C1C3F !important; }
+      html body .lp-sticky-atc__price { color: #8C1C3F !important; }
+      html body .lp-sticky-atc__btn:hover { background: #8C1C3F !important; color: #fff !important; }
+      html body .lp-wa-btn { background: #8C1C3F !important; box-shadow: 0 2px 8px rgba(140,28,63,0.35) !important; }
+      html body .lp-wa-btn:hover { background: #6E1530 !important; }
+    </style>
+  {%- endif -%}
+
+  {%- comment -%} ══ PROBIÓTICOS: tema rosa fuerte en toda la página ══ {%- endcomment -%}
+  {%- if product.handle == 'probiotico-vaginal-physicians-choice' -%}
+    <style>
+      html body .price__sale .price-item--sale, html body .price .price-item--sale { font-size: 34px !important; font-weight: 800 !important; color: #D6336C !important; line-height: 1.05 !important; }
+      html body .price__sale .price-item--regular, html body .price s .price-item { font-size: 19px !important; color: #999 !important; }
+      html body .price__badge-sale, html body .price .badge { background: #D6336C !important; color: #fff !important; font-weight: 700 !important; }
+      html body .lp-hook__eyebrow, html body .lp-features__eyebrow, html body .lp-faq__eyebrow, html body .lp-rr__eyebrow { color: #D6336C !important; }
+      html body .lp-hook { background: linear-gradient(180deg, #fff 0%, #FFF0F5 100%) !important; }
+      html body .lp-hook__title em { color: #D6336C !important; }
+      html body .lp-trust-row { background: #FFF0F5 !important; border-color: #F3C2D5 !important; }
+      html body .lp-features__icon { background: #FFF0F5 !important; }
+      html body .lp-features__card:hover { border-color: #D6336C !important; }
+      html body .lp-howto { background: linear-gradient(135deg, #7a1540 0%, #D6336C 100%) !important; }
+      html body .lp-howto__num { background: #F8BBD0 !important; color: #AD2456 !important; }
+      html body .lp-howto__eyebrow { color: #F8BBD0 !important; }
+      html body .lp-guarantee { background: #FFF0F5 !important; }
+      html body .lp-guarantee__seal { background: radial-gradient(circle at 30% 30%, #F8BBD0, #D6336C) !important; box-shadow: 0 6px 20px rgba(214,51,108,0.3) !important; }
+      html body .lp-guarantee__title { color: #D6336C !important; }
+      html body .lp-included__icon { background: #FFF0F5 !important; }
+      html body .lp-included__check { background: #D6336C !important; }
+      html body .lp-rr__container { background: #FFF0F5 !important; }
+      html body .lp-rr__verified { color: #D6336C !important; }
+      html body .lp-rr__verified::before { background: #D6336C !important; }
+      html body .lp-rr__title em { color: #D6336C !important; }
+      html body .lp-foryou { background: linear-gradient(135deg, #7a1540 0%, #D6336C 100%) !important; }
+      html body .lp-foryou__item::before { background: #F8BBD0 !important; color: #AD2456 !important; }
+      html body .lp-foryou__cta-eyebrow { color: #F8BBD0 !important; }
+      html body .lp-foryou__cta-btn { background: #F8BBD0 !important; color: #AD2456 !important; }
+      html body .lp-foryou__cta-btn:hover { background: #fff !important; color: #AD2456 !important; }
+      html body .lp-faq__icon { background: #FFF0F5 !important; color: #D6336C !important; }
+      html body .lp-faq__item[open] { border-color: #D6336C !important; }
+      html body .lp-faq__item[open] .lp-faq__icon { background: #D6336C !important; color: #fff !important; }
+      html body .lp-bcta { background: linear-gradient(160deg, #AD2456 0%, #D6336C 100%) !important; }
+      html body .lp-bcta__title em { color: #F8BBD0 !important; }
+      html body .lp-bcta__btn { color: #D6336C !important; }
+      html body .lp-sticky-atc__price { color: #D6336C !important; }
+      html body .lp-sticky-atc__btn:hover { background: #D6336C !important; color: #fff !important; }
+      html body .lp-wa-btn { background: #D6336C !important; box-shadow: 0 2px 8px rgba(214,51,108,0.35) !important; }
+      html body .lp-wa-btn:hover { background: #AD2456 !important; }
+    </style>
+  {%- endif -%}
+
+  {%- comment -%} ── Badges de confianza (enzimas) o botón WhatsApp (resto) ── {%- endcomment -%}
+  {%- if product != blank -%}
+    {%- if product.handle == 'physicians-choice-enzimas-digestivas' -%}
+      <div class="ez-badges">
+        <div class="ez-badge"><span class="ez-badge__ic">🩺</span><span class="ez-badge__tx">Desarrollado<br>con médicos</span></div>
+        <div class="ez-badge"><span class="ez-badge__ic">🇺🇸</span><span class="ez-badge__tx">Marca #1<br>en EE.UU.</span></div>
+        <div class="ez-badge"><span class="ez-badge__ic">🌿</span><span class="ez-badge__tx">Fórmula<br>natural</span></div>
+        <div class="ez-badge"><span class="ez-badge__ic">🔬</span><span class="ez-badge__tx">Sin efectos<br>secundarios</span></div>
+      </div>
+      <style>
+        .ez-badges { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
+        .ez-badge { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 5px; padding: 12px 6px; background: #FEF3F3; border: 1px solid #F0C0C0; border-radius: 10px; }
+        .ez-badge__ic { font-size: 24px; line-height: 1; }
+        .ez-badge__tx { font-family: 'DM Sans', system-ui, sans-serif; font-size: 11px; font-weight: 700; color: #6B1515; line-height: 1.25; }
+        @media (max-width: 480px) { .ez-badges { grid-template-columns: repeat(2, 1fr); } .ez-badge__tx { font-size: 12px; } }
+      </style>
+    {%- elsif product.handle == 'extractor-electrico-inalambrico' or product.handle == 'lunea-go' or product.handle == 'astaxantina-premium-microingredientes' or product.handle == 'probiotico-vaginal-physicians-choice' -%}
+    {%- assign lp_wa_number = '5493764250518' -%}
+    {%- if product.handle == 'astaxantina-premium-microingredientes' -%}
+      {%- assign lp_wa_msg = 'Hola%21%20Vi%20la%20Astaxantina%20Premium%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n%20antes%20de%20comprar.%20%C2%BFMe%20pueden%20ayudar%3F' -%}
+    {%- elsif product.handle == 'probiotico-vaginal-physicians-choice' -%}
+      {%- assign lp_wa_number = '5493764196664' -%}
+      {%- assign lp_wa_msg = 'Hola%21%20Vi%20los%20Probi%C3%B3ticos%20Vaginales%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n.%20%C2%BFMe%20pueden%20ayudar%3F' -%}
+    {%- else -%}
+      {%- assign lp_wa_msg = 'Hola%21%20Vi%20el%20Extractor%20Lunea%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n%20antes%20de%20comprar.%20%C2%BFMe%20pueden%20ayudar%3F' -%}
+    {%- endif -%}
+    <a
+      href="https://wa.me/{{ lp_wa_number }}?text={{ lp_wa_msg }}"
+      class="lp-wa-btn"
+      target="_blank"
+      rel="noopener"
+      aria-label="Consultar por WhatsApp"
+    >
+      <svg class="lp-wa-btn__icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+      </svg>
+      <span>¿Es el indicado para mí? Consultar gratis 💬</span>
+    </a>
+    {%- endif -%}
+    <style>
+      .lp-wa-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        padding: 14px 20px;
+        margin-bottom: 10px;
+        background: #25D366;
+        color: #fff;
+        font-family: 'DM Sans', system-ui, sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background 0.2s ease, transform 0.1s ease;
+        box-shadow: 0 2px 8px rgba(37, 211, 102, 0.35);
+      }
+      .lp-wa-btn:hover {
+        background: #1ebe5d;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 14px rgba(37, 211, 102, 0.45);
+      }
+      .lp-wa-btn:active { transform: translateY(0); }
+      .lp-wa-btn__icon {
+        width: 22px;
+        height: 22px;
+        flex-shrink: 0;
+      }
+      /* ── Botón de compra — teal oscuro Lunea ── */
+      .product-form__submit.button--primary {
+        background: #0d6e82 !important;
+        color: #fff !important;
+        border-color: #0d6e82 !important;
+        box-shadow: 0 4px 14px rgba(13, 110, 130, 0.4) !important;
+        font-size: 16px !important;
+        letter-spacing: 0.01em !important;
+      }
+      .product-form__submit.button--primary:hover {
+        background: #0a5566 !important;
+        border-color: #0a5566 !important;
+        box-shadow: 0 6px 18px rgba(13, 110, 130, 0.5) !important;
+        transform: translateY(-1px);
+      }
+      .product-form__submit.button--primary:active {
+        transform: translateY(0);
+      }
+    </style>
+  {%- endif -%}
+
+  {%- if product != blank -%}
+    {%- liquid
+      assign gift_card_recipient_feature_active = false
+      if block.settings.show_gift_card_recipient and product.gift_card?
+        assign gift_card_recipient_feature_active = true
+      endif
+
+      assign show_dynamic_checkout = false
+      if block.settings.show_dynamic_checkout and gift_card_recipient_feature_active == false
+        assign show_dynamic_checkout = true
+      endif
+    -%}
+
+    <product-form
+      class="product-form"
+      data-hide-errors="{{ gift_card_recipient_feature_active }}"
+      data-section-id="{{ section.id }}"
+    >
+      <div class="product-form__error-message-wrapper" role="alert" hidden>
+        <span class="svg-wrapper">
+          {{- 'icon-error.svg' | inline_asset_content -}}
+        </span>
+        <span class="product-form__error-message"></span>
+      </div>
+
+      {%- form 'product',
+        product,
+        id: product_form_id,
+        class: 'form',
+        novalidate: 'novalidate',
+        data-type: 'add-to-cart-form'
+      -%}
+        <input
+          type="hidden"
+          name="id"
+          value="{{ product.selected_or_first_available_variant.id }}"
+          {% if product.selected_or_first_available_variant.available == false
+            or quantity_rule_soldout
+            or product.selected_or_first_available_variant == null
+          %}
+            disabled
+          {% endif %}
+          class="product-variant-id"
+        >
+
+        {%- if gift_card_recipient_feature_active -%}
+          {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
+        {%- endif -%}
+
+        <div class="product-form__buttons">
+          {%- liquid
+            assign check_against_inventory = true
+            if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
+              assign check_against_inventory = false
+            endif
+            if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
+              assign quantity_rule_soldout = true
+            endif
+          -%}
+          {%- unless product.handle == 'physicians-choice-enzimas-digestivas' or product.handle == 'crema-nida-youthfull-100ml' or product.handle == 'formula-juvenil-asiatica' or product.handle == 'astaxantina-premium-microingredientes' or product.handle == 'probiotico-vaginal-physicians-choice' or product.handle == 'celimax-retinal-shot-tightening' -%}
+          <button
+            id="ProductSubmitButton-{{ section_id }}"
+            type="submit"
+            name="add"
+            class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
+            {% if product.selected_or_first_available_variant.available == false
+              or quantity_rule_soldout
+              or product.selected_or_first_available_variant == null
+            %}
+              disabled
+            {% endif %}
+          >
+            <span>
+              {%- if product.selected_or_first_available_variant == null -%}
+                {{ 'products.product.unavailable' | t }}
+              {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+                {{ 'products.product.sold_out' | t }}
+              {%- else -%}
+                {{ 'products.product.add_to_cart' | t }}
+              {%- endif -%}
+            </span>
+            {%- render 'loading-spinner' -%}
+          </button>
+          {%- if show_dynamic_checkout -%}
+            {{ form | payment_button }}
+          {%- endif -%}
+          {%- endunless -%}
+
+          {%- comment -%} ── Selector de cantidad: enzimas, crema y astaxantina ── {%- endcomment -%}
+          {%- assign is_crema = false -%}
+          {%- if product.handle == 'crema-nida-youthfull-100ml' or product.handle == 'formula-juvenil-asiatica' -%}{%- assign is_crema = true -%}{%- endif -%}
+          {%- assign is_asta = false -%}
+          {%- if product.handle == 'astaxantina-premium-microingredientes' -%}{%- assign is_asta = true -%}{%- endif -%}
+          {%- assign is_probi = false -%}
+          {%- if product.handle == 'probiotico-vaginal-physicians-choice' -%}{%- assign is_probi = true -%}{%- endif -%}
+          {%- if product.handle == 'physicians-choice-enzimas-digestivas' -%}
+            {%- assign ez_vid = product.selected_or_first_available_variant.id -%}
+            <style>
+              .lp-qty-sel { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+              .lp-qty-opt {
+                display: flex; align-items: center; gap: 14px;
+                padding: 14px 18px; border-radius: 10px; cursor: pointer;
+                border: 2px solid #e8c4c4; background: #fff; color: #2E3F45;
+                font-family: 'DM Sans', system-ui, sans-serif;
+                transition: border-color 0.2s, box-shadow 0.2s;
+                position: relative; user-select: none;
+              }
+              .lp-qty-opt:hover { border-color: #B22222; }
+              .lp-qty-opt.is-selected { border-color: #B22222; background: #FEF3F3; box-shadow: 0 2px 10px rgba(178,34,34,0.15); }
+              .lp-qty-opt__radio {
+                width: 20px; height: 20px; border-radius: 50%;
+                border: 2px solid #ccc; flex-shrink: 0;
+                display: flex; align-items: center; justify-content: center;
+                transition: border-color 0.2s;
+              }
+              .lp-qty-opt.is-selected .lp-qty-opt__radio {
+                border-color: #B22222; background: #B22222;
+              }
+              .lp-qty-opt.is-selected .lp-qty-opt__radio::after {
+                content: ''; width: 8px; height: 8px;
+                border-radius: 50%; background: #fff;
+              }
+              .lp-qty-opt__info { flex: 1; }
+              .lp-qty-opt__name { font-size: 16px; font-weight: 700; color: #2E3F45; display: block; }
+              .lp-qty-opt__saving { display: inline-block; font-size: 12px; color: #fff; background: #B22222; font-weight: 700; padding: 2px 8px; border-radius: 6px; margin-top: 3px; }
+              .lp-qty-opt__prices { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; }
+              .lp-qty-opt__anchor { font-size: 13px; color: #999; text-decoration: line-through; line-height: 1; }
+              .lp-qty-opt__price { font-size: 24px; font-weight: 900; color: #B22222; line-height: 1.05; }
+              .lp-qty-opt__unit { font-size: 11px; color: #888; }
+              .lp-qty-opt__badge {
+                position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+                background: #B22222; color: #fff; font-size: 11px; font-weight: 800;
+                padding: 3px 12px; border-radius: 20px; white-space: nowrap;
+                letter-spacing: 0.05em;
+              }
+              .lp-qty-cta {
+                display: flex; align-items: center; justify-content: center; gap: 8px;
+                width: 100%; padding: 16px 20px; margin-top: 6px;
+                background: #B22222; color: #fff; border: none; border-radius: 10px;
+                font-size: 16px; font-weight: 700; font-family: 'DM Sans', system-ui, sans-serif;
+                cursor: pointer; text-decoration: none;
+                transition: background 0.2s, transform 0.1s;
+                box-shadow: 0 4px 14px rgba(178,34,34,0.4);
+              }
+              .lp-qty-cta:hover { background: #8B1A1A; transform: translateY(-1px); color: #fff; }
+              .lp-qty-cta:active { transform: translateY(0); }
+            </style>
+
+            <div class="lp-qty-sel" id="lp-qty-sel-{{ section_id }}">
+              <div class="lp-qty-opt" data-url="/cart/{{ ez_vid }}:1">
+                <div class="lp-qty-opt__radio"></div>
+                <div class="lp-qty-opt__info">
+                  <span class="lp-qty-opt__name">1 frasco</span>
+                  <span class="lp-qty-opt__saving">Precio oferta</span>
+                </div>
+                <div class="lp-qty-opt__prices">
+                  <span class="lp-qty-opt__anchor">$89.900</span>
+                  <span class="lp-qty-opt__price">$74.900</span>
+                  <span class="lp-qty-opt__unit">$74.900 c/u</span>
+                </div>
+              </div>
+
+              <div class="lp-qty-opt is-selected" data-url="/cart/{{ ez_vid }}:2?discount=ENZIMAS2X">
+                <span class="lp-qty-opt__badge">⭐ MÁS POPULAR</span>
+                <div class="lp-qty-opt__radio"></div>
+                <div class="lp-qty-opt__info">
+                  <span class="lp-qty-opt__name">2 frascos</span>
+                  <span class="lp-qty-opt__saving">Ahorras $19.900</span>
+                </div>
+                <div class="lp-qty-opt__prices">
+                  <span class="lp-qty-opt__anchor">$149.800</span>
+                  <span class="lp-qty-opt__price">$129.900</span>
+                  <span class="lp-qty-opt__unit">$64.950 c/u</span>
+                </div>
+              </div>
+
+              <div class="lp-qty-opt" data-url="/cart/{{ ez_vid }}:3?discount=ENZIMAS3X">
+                <div class="lp-qty-opt__radio"></div>
+                <div class="lp-qty-opt__info">
+                  <span class="lp-qty-opt__name">3 frascos</span>
+                  <span class="lp-qty-opt__saving">Ahorras $54.800</span>
+                </div>
+                <div class="lp-qty-opt__prices">
+                  <span class="lp-qty-opt__anchor">$224.700</span>
+                  <span class="lp-qty-opt__price">$169.900</span>
+                  <span class="lp-qty-opt__unit">$56.633 c/u</span>
+                </div>
+              </div>
+            </div>
+
+            <a href="/cart/{{ ez_vid }}:2?discount=ENZIMAS2X" class="lp-qty-cta" id="lp-qty-cta-{{ section_id }}">
+              📦 Quiero el mío — Pago al recibirlo
+            </a>
+            <p class="lp-qty-pay">🚚 Envío gratis · 💵 Pago contra entrega o por Nequi</p>
+            <style>
+              .lp-qty-pay { text-align: center; font-size: 12.5px; color: #6B7E85; margin: 8px 0 0; font-family: 'DM Sans', system-ui, sans-serif; font-weight: 600; }
+            </style>
+
+            <script>
+            (function() {
+              var sel = document.getElementById('lp-qty-sel-{{ section_id }}');
+              var cta = document.getElementById('lp-qty-cta-{{ section_id }}');
+              if (!sel || !cta) return;
+              sel.querySelectorAll('.lp-qty-opt').forEach(function(opt) {
+                opt.addEventListener('click', function() {
+                  sel.querySelectorAll('.lp-qty-opt').forEach(function(o) { o.classList.remove('is-selected'); });
+                  opt.classList.add('is-selected');
+                  cta.href = opt.dataset.url;
+                });
+              });
+            })();
+            </script>
+
+          {%- elsif is_crema -%}
+            {%- assign cr_vid = product.selected_or_first_available_variant.id -%}
+            <style>
+              .lp-qty-sel { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+              .lp-qty-opt {
+                display: flex; align-items: center; gap: 14px;
+                padding: 14px 18px; border-radius: 10px; cursor: pointer;
+                border: 2px solid #b8e0ed; background: #fff; color: #1a3a4a;
+                font-family: 'DM Sans', system-ui, sans-serif;
+                transition: border-color 0.2s, box-shadow 0.2s;
+                position: relative; user-select: none;
+              }
+              .lp-qty-opt:hover { border-color: #2a9dc5; }
+              .lp-qty-opt.is-selected { border-color: #2a9dc5; background: #eaf6fb; box-shadow: 0 2px 10px rgba(42,157,197,0.15); }
+              .lp-qty-opt__radio {
+                width: 20px; height: 20px; border-radius: 50%;
+                border: 2px solid #ccc; flex-shrink: 0;
+                display: flex; align-items: center; justify-content: center;
+                transition: border-color 0.2s;
+              }
+              .lp-qty-opt.is-selected .lp-qty-opt__radio { border-color: #2a9dc5; background: #2a9dc5; }
+              .lp-qty-opt.is-selected .lp-qty-opt__radio::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+              .lp-qty-opt__info { flex: 1; }
+              .lp-qty-opt__name { font-size: 16px; font-weight: 700; color: #1a3a4a; display: block; }
+              .lp-qty-opt__saving { display: inline-block; font-size: 12px; color: #fff; background: #2a9dc5; font-weight: 700; padding: 2px 8px; border-radius: 6px; margin-top: 3px; }
+              .lp-qty-opt__prices { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; }
+              .lp-qty-opt__anchor { font-size: 13px; color: #999; text-decoration: line-through; line-height: 1; }
+              .lp-qty-opt__price { font-size: 24px; font-weight: 900; color: #2a9dc5; line-height: 1.05; }
+              .lp-qty-opt__unit { font-size: 11px; color: #888; }
+              .lp-qty-opt__badge {
+                position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+                background: #2a9dc5; color: #fff; font-size: 11px; font-weight: 800;
+                padding: 3px 12px; border-radius: 20px; white-space: nowrap; letter-spacing: 0.05em;
+              }
+              .lp-qty-cta {
+                display: flex; align-items: center; justify-content: center; gap: 8px;
+                width: 100%; padding: 18px 20px; margin-top: 6px;
+                background: #FF4D6D; color: #fff; border: none; border-radius: 10px;
+                font-size: 17px; font-weight: 800; font-family: 'DM Sans', system-ui, sans-serif;
+                cursor: pointer; text-decoration: none;
+                transition: background 0.2s, transform 0.1s;
+                box-shadow: 0 6px 18px rgba(255,77,109,0.45);
+                animation: lpCtaPulse 2s ease-in-out infinite;
+              }
+              @keyframes lpCtaPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.025); } }
+              .lp-qty-cta:hover { background: #E63956; transform: translateY(-1px); color: #fff; animation: none; }
+              .lp-qty-cta:active { transform: translateY(0); }
+              .lp-qty-pay { text-align: center; font-size: 12.5px; color: #6B7E85; margin: 8px 0 0; font-family: 'DM Sans', system-ui, sans-serif; font-weight: 600; }
+            </style>
+
+            <div class="lp-qty-sel" id="lp-qty-sel-{{ section_id }}">
+              <div class="lp-qty-opt is-selected" data-url="/cart/{{ cr_vid }}:1">
+                <div class="lp-qty-opt__radio"></div>
+                <div class="lp-qty-opt__info">
+                  <span class="lp-qty-opt__name">1 tubo</span>
+                  <span class="lp-qty-opt__saving">Precio oferta</span>
+                </div>
+                <div class="lp-qty-opt__prices">
+                  <span class="lp-qty-opt__anchor">$99.900</span>
+                  <span class="lp-qty-opt__price">$79.900</span>
+                  <span class="lp-qty-opt__unit">$79.900 c/u</span>
+                </div>
+              </div>
+
+              <div class="lp-qty-opt" data-url="/cart/{{ cr_vid }}:2?discount=CREMA2X">
+                <span class="lp-qty-opt__badge">⭐ MÁS POPULAR</span>
+                <div class="lp-qty-opt__radio"></div>
+                <div class="lp-qty-opt__info">
+                  <span class="lp-qty-opt__name">2 tubos</span>
+                  <span class="lp-qty-opt__saving">Ahorras $9.900</span>
+                </div>
+                <div class="lp-qty-opt__prices">
+                  <span class="lp-qty-opt__anchor">$159.800</span>
+                  <span class="lp-qty-opt__price">$149.900</span>
+                  <span class="lp-qty-opt__unit">$74.950 c/u</span>
+                </div>
+              </div>
+
+              <div class="lp-qty-opt" data-url="/cart/{{ cr_vid }}:3?discount=CREMA3X">
+                <div class="lp-qty-opt__radio"></div>
+                <div class="lp-qty-opt__info">
+                  <span class="lp-qty-opt__name">3 tubos</span>
+                  <span class="lp-qty-opt__saving">Ahorras $49.800</span>
+                </div>
+                <div class="lp-qty-opt__prices">
+                  <span class="lp-qty-opt__anchor">$239.700</span>
+                  <span class="lp-qty-opt__price">$189.900</span>
+                  <span class="lp-qty-opt__unit">$63.300 c/u</span>
+                </div>
+              </div>
+            </div>
+
+            <a href="/cart/{{ cr_vid }}:1" class="lp-qty-cta" id="lp-qty-cta-{{ section_id }}">
+              🛒 Quiero la mía — Pago al recibirlo
+            </a>
+            <p class="lp-qty-pay">🚚 Envío gratis · 💵 Pago contra entrega o por Nequi</p>
+
+            <script>
+            (function() {
+              var sel = document.getElementById('lp-qty-sel-{{ section_id }}');
+              var cta = document.getElementById('lp-qty-cta-{{ section_id }}');
+              if (!sel || !cta) return;
+              sel.querySelectorAll('.lp-qty-opt').forEach(function(opt) {
+                opt.addEventListener('click', function() {
+                  sel.querySelectorAll('.lp-qty-opt').forEach(function(o) { o.classList.remove('is-selected'); });
+                  opt.classList.add('is-selected');
+                  cta.href = opt.dataset.url;
+                });
+              });
+            })();
+            </script>
+
+          {%- elsif is_asta -%}
+            {%- assign as_vid = product.selected_or_first_available_variant.id -%}
+            <style>
+              .lp-qty-sel { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+              .lp-qty-opt { display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-radius: 10px; cursor: pointer; border: 2px solid #E8C4D0; background: #fff; color: #4a1622; font-family: 'DM Sans', system-ui, sans-serif; transition: border-color 0.2s, box-shadow 0.2s; position: relative; user-select: none; }
+              .lp-qty-opt:hover { border-color: #8C1C3F; }
+              .lp-qty-opt.is-selected { border-color: #8C1C3F; background: #FBEDF1; box-shadow: 0 2px 10px rgba(140,28,63,0.15); }
+              .lp-qty-opt__radio { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #ccc; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s; }
+              .lp-qty-opt.is-selected .lp-qty-opt__radio { border-color: #8C1C3F; background: #8C1C3F; }
+              .lp-qty-opt.is-selected .lp-qty-opt__radio::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+              .lp-qty-opt__info { flex: 1; }
+              .lp-qty-opt__name { font-size: 16px; font-weight: 700; color: #4a1622; display: block; }
+              .lp-qty-opt__saving { display: inline-block; font-size: 12px; color: #fff; background: #8C1C3F; font-weight: 700; padding: 2px 8px; border-radius: 6px; margin-top: 3px; }
+              .lp-qty-opt__prices { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; }
+              .lp-qty-opt__anchor { font-size: 13px; color: #999; text-decoration: line-through; line-height: 1; }
+              .lp-qty-opt__price { font-size: 24px; font-weight: 900; color: #8C1C3F; line-height: 1.05; }
+              .lp-qty-opt__unit { font-size: 11px; color: #888; }
+              .lp-qty-opt__badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: #8C1C3F; color: #fff; font-size: 11px; font-weight: 800; padding: 3px 12px; border-radius: 20px; white-space: nowrap; letter-spacing: 0.05em; }
+              .lp-qty-cta { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 18px 20px; margin-top: 6px; background: #8C1C3F; color: #fff; border: none; border-radius: 10px; font-size: 17px; font-weight: 800; font-family: 'DM Sans', system-ui, sans-serif; cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.1s; box-shadow: 0 6px 18px rgba(140,28,63,0.45); animation: lpCtaPulse 2s ease-in-out infinite; }
+              @keyframes lpCtaPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.025); } }
+              .lp-qty-cta:hover { background: #6E1530; transform: translateY(-1px); color: #fff; animation: none; }
+              .lp-qty-cta:active { transform: translateY(0); }
+              .lp-qty-pay { text-align: center; font-size: 12.5px; color: #6B7E85; margin: 8px 0 0; font-family: 'DM Sans', system-ui, sans-serif; font-weight: 600; }
+            </style>
+
+            <div class="lp-qty-sel" id="lp-qty-sel-{{ section_id }}">
+              <div class="lp-qty-opt" data-url="/cart/{{ as_vid }}:1">
+                <div class="lp-qty-opt__radio"></div>
+                <div class="lp-qty-opt__info"><span class="lp-qty-opt__name">1 bolsa</span><span class="lp-qty-opt__saving">Precio oferta</span></div>
+                <div class="lp-qty-opt__prices"><span class="lp-qty-opt__anchor">$109.900</span><span class="lp-qty-opt__price">$79.900</span><span class="lp-qty-opt__unit">$79.900 c/u</span></div>
+              </div>
+              <div class="lp-qty-opt is-selected" data-url="/cart/{{ as_vid }}:2?discount=ASTA2X">
+                <span class="lp-qty-opt__badge">⭐ MÁS POPULAR</span>
+                <div class="lp-qty-opt__radio"></div>
+                <div class="lp-qty-opt__info"><span class="lp-qty-opt__name">2 bolsas</span><span class="lp-qty-opt__saving">Ahorras $19.900</span></div>
+                <div class="lp-qty-opt__prices"><span class="lp-qty-opt__anchor">$159.800</span><span class="lp-qty-opt__price">$139.900</span><span class="lp-qty-opt__unit">$69.950 c/u</span></div>
+              </div>
+              <div class="lp-qty-opt" data-url="/cart/{{ as_vid }}:3?discount=ASTA3X">
+                <div class="lp-qty-opt__radio"></div>
+                <div class="lp-qty-opt__info"><span class="lp-qty-opt__name">3 bolsas</span><span class="lp-qty-opt__saving">Ahorras $44.800</span></div>
+                <div class="lp-qty-opt__prices"><span class="lp-qty-opt__anchor">$239.700</span><span class="lp-qty-opt__price">$194.900</span><span class="lp-qty-opt__unit">$64.967 c/u</span></div>
+              </div>
+            </div>
+
+            <a href="/cart/{{ as_vid }}:2?discount=ASTA2X" class="lp-qty-cta" id="lp-qty-cta-{{ section_id }}">
+              🛒 Quiero la mía — Pago al recibirlo
+            </a>
+            <p class="lp-qty-pay">🚚 Envío gratis · 💵 Pago contra entrega o por Nequi</p>
+
+            <script>
+            (function() {
+              var sel = document.getElementById('lp-qty-sel-{{ section_id }}');
+              var cta = document.getElementById('lp-qty-cta-{{ section_id }}');
+              if (!sel || !cta) return;
+              sel.querySelectorAll('.lp-qty-opt').forEach(function(opt) {
+                opt.addEventListener('click', function() {
+                  sel.querySelectorAll('.lp-qty-opt').forEach(function(o) { o.classList.remove('is-selected'); });
+                  opt.classList.add('is-selected');
+                  cta.href = opt.dataset.url;
+                });
+              });
+            })();
+            </script>
+
+          {%- elsif is_probi -%}
+            {%- assign pr_vid = product.selected_or_first_available_variant.id -%}
+            <style>
+              .lp-qty-sel { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+              .lp-qty-opt { display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-radius: 10px; cursor: pointer; border: 2px solid #f3c2d5; background: #fff; color: #4a1a2e; font-family: 'DM Sans', system-ui, sans-serif; transition: border-color 0.2s, box-shadow 0.2s; position: relative; user-select: none; }
+              .lp-qty-opt:hover { border-color: #D6336C; }
+              .lp-qty-opt.is-selected { border-color: #D6336C; background: #FFF0F5; box-shadow: 0 2px 10px rgba(214,51,108,0.15); }
+              .lp-qty-opt__radio { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #ccc; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s; }
+              .lp-qty-opt.is-selected .lp-qty-opt__radio { border-color: #D6336C; background: #D6336C; }
+              .lp-qty-opt.is-selected .lp-qty-opt__radio::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+              .lp-qty-opt__info { flex: 1; }
+              .lp-qty-opt__name { font-size: 16px; font-weight: 700; color: #4a1a2e; display: block; }
+              .lp-qty-opt__saving { display: inline-block; font-size: 12px; color: #fff; background: #D6336C; font-weight: 700; padding: 2px 8px; border-radius: 6px; margin-top: 3px; }
+              .lp-qty-opt__prices { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; }
+              .lp-qty-opt__anchor { font-size: 13px; color: #999; text-decoration: line-through; line-height: 1; }
+              .lp-qty-opt__price { font-size: 24px; font-weight: 900; color: #D6336C; line-height: 1.05; }
+              .lp-qty-opt__unit { font-size: 11px; color: #888; }
+              .lp-qty-opt__badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: #D6336C; color: #fff; font-size: 11px; font-weight: 800; padding: 3px 12px; border-radius: 20px; white-space: nowrap; letter-spacing: 0.05em; }
+              .lp-qty-cta { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 18px 20px; margin-top: 6px; background: #D6336C; color: #fff; border: none; border-radius: 10px; font-size: 17px; font-weight: 800; font-family: 'DM Sans', system-ui, sans-serif; cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.1s; box-shadow: 0 6px 18px rgba(214,51,108,0.45); animation: lpCtaPulse 2s ease-in-out infinite; }
+              @keyframes lpCtaPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.025); } }
+              .lp-qty-cta:hover { background: #ad2456; transform: translateY(-1px); color: #fff; animation: none; }
+              .lp-qty-cta:active { transform: translateY(0); }
+              .lp-qty-pay { text-align: center; font-size: 12.5px; color: #6B7E85; margin: 8px 0 0; font-family: 'DM Sans', system-ui, sans-serif; font-weight: 600; }
+            </style>
+
+            <div class="lp-probi-hook">
+              <span class="lp-probi-hook__pill">🎁 Oferta de lanzamiento</span>
+              <span class="lp-probi-hook__txt">Combos con hasta <strong>$45.000</strong> de ahorro · envío gratis</span>
+            </div>
+            <style>
+              .lp-probi-hook { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:0 0 12px; padding:10px 14px; border-radius:10px; background:linear-gradient(90deg,#FFF0F5,#FCE0EC); border:1px solid #F3C2D5; font-family:'DM Sans',system-ui,sans-serif; }
+              .lp-probi-hook__pill { background:#D6336C; color:#fff; font-size:12px; font-weight:800; padding:3px 10px; border-radius:20px; white-space:nowrap; letter-spacing:.02em; }
+              .lp-probi-hook__txt { font-size:13.5px; color:#7a1540; font-weight:600; line-height:1.3; }
+              .lp-probi-hook__txt strong { color:#D6336C; font-weight:800; }
+            </style>
+
+            <div class="lp-qty-sel" id="lp-qty-sel-{{ section_id }}">
+              <div class="lp-qty-opt" data-url="/cart/{{ pr_vid }}:1">
+                <div class="lp-qty-opt__radio"></div>
+                <div class="lp-qty-opt__info"><span class="lp-qty-opt__name">1 frasco</span><span class="lp-qty-opt__saving">Precio oferta</span></div>
+                <div class="lp-qty-opt__prices"><span class="lp-qty-opt__anchor">$100.000</span><span class="lp-qty-opt__price">$70.000</span><span class="lp-qty-opt__unit">$70.000 c/u</span></div>
+              </div>
+              <div class="lp-qty-opt is-selected" data-url="/cart/{{ pr_vid }}:2?discount=PROBI2X">
+                <span class="lp-qty-opt__badge">⭐ MÁS POPULAR</span>
+                <div class="lp-qty-opt__radio"></div>
+                <div class="lp-qty-opt__info"><span class="lp-qty-opt__name">2 frascos</span><span class="lp-qty-opt__saving">Ahorras $20.000</span></div>
+                <div class="lp-qty-opt__prices"><span class="lp-qty-opt__anchor">$140.000</span><span class="lp-qty-opt__price">$120.000</span><span class="lp-qty-opt__unit">$60.000 c/u</span></div>
+              </div>
+              <div class="lp-qty-opt" data-url="/cart/{{ pr_vid }}:3?discount=PROBI3X">
+                <div class="lp-qty-opt__radio"></div>
+                <div class="lp-qty-opt__info"><span class="lp-qty-opt__name">3 frascos</span><span class="lp-qty-opt__saving">Ahorras $45.000</span></div>
+                <div class="lp-qty-opt__prices"><span class="lp-qty-opt__anchor">$210.000</span><span class="lp-qty-opt__price">$165.000</span><span class="lp-qty-opt__unit">$55.000 c/u</span></div>
+              </div>
+            </div>
+
+            <a href="/cart/{{ pr_vid }}:2?discount=PROBI2X" class="lp-qty-cta" id="lp-qty-cta-{{ section_id }}">
+              🛒 Quiero la mía — Pago al recibirlo
+            </a>
+            <p class="lp-qty-pay">🚚 Envío gratis · 💵 Pago contra entrega o por Nequi</p>
+
+            <script>
+            (function() {
+              var sel = document.getElementById('lp-qty-sel-{{ section_id }}');
+              var cta = document.getElementById('lp-qty-cta-{{ section_id }}');
+              if (!sel || !cta) return;
+              sel.querySelectorAll('.lp-qty-opt').forEach(function(opt) {
+                opt.addEventListener('click', function() {
+                  sel.querySelectorAll('.lp-qty-opt').forEach(function(o) { o.classList.remove('is-selected'); });
+                  opt.classList.add('is-selected');
+                  cta.href = opt.dataset.url;
+                });
+              });
+            })();
+            </script>
+
+          {%- endif -%}
+
+          {%- comment -%} ── Botón 2 unidades en promoción (link nativo, sin fetch) ── {%- endcomment -%}
+          {%- comment -%} ALLOWLIST: el botón 2x SOLO aparece en handles con un combo 2x real (opt-in). Los productos nuevos NO lo muestran. La crema/asta/probi usan su propio selector, NO van acá. Para sumar uno, agregá su handle. {%- endcomment -%}
+          {%- if product.selected_or_first_available_variant.available and product.handle == 'lunea-go' -%}
+            {%- if product.handle == 'lunea-go' -%}
+              {%- assign lp_2x_discount = 'LUNEAGO2X' -%}
+              {%- assign lp_2x_label = '$230.000 las 2 — ahorras $40.000' -%}
+            {%- elsif product.handle == 'crema-nida-youthfull-100ml' or product.handle == 'formula-juvenil-asiatica' -%}
+              {%- assign lp_2x_discount = 'CREMA2X' -%}
+              {%- assign lp_2x_label = '$159.800 las 2 — ahorras $20.000' -%}
+            {%- else -%}
+              {%- assign lp_2x_discount = 'LUNEA2X' -%}
+              {%- assign lp_2x_label = '$390.000 las 2 — ahorras $48.000' -%}
+            {%- endif -%}
+            <a
+              href="/cart/{{ product.selected_or_first_available_variant.id }}:2?discount={{ lp_2x_discount }}"
+              class="lp-btn-2x"
+              aria-label="Comprar 2 unidades en promoción"
+            >
+              <span class="lp-btn-2x__icon">🎁</span>
+              <span class="lp-btn-2x__text">
+                <span class="lp-btn-2x__label">Quiero 2 en promoción</span>
+                <span class="lp-btn-2x__price">{{ lp_2x_label }}</span>
+              </span>
+            </a>
+            <style>
+              .lp-btn-2x {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                width: 100%;
+                padding: 14px 20px;
+                margin-top: 10px;
+                background: #0d6e82;
+                color: #fff;
+                font-family: 'DM Sans', system-ui, sans-serif;
+                border-radius: 8px;
+                text-decoration: none;
+                text-align: left;
+                transition: background 0.2s ease, transform 0.1s ease;
+                box-shadow: 0 2px 8px rgba(13, 110, 130, 0.35);
+              }
+              .lp-btn-2x:hover {
+                background: #0a5566;
+                color: #fff;
+                transform: translateY(-1px);
+                box-shadow: 0 4px 14px rgba(13, 110, 130, 0.45);
+              }
+              .lp-btn-2x:active { transform: translateY(0); }
+              .lp-btn-2x__icon { font-size: 20px; flex-shrink: 0; }
+              .lp-btn-2x__text { display: flex; flex-direction: column; gap: 1px; }
+              .lp-btn-2x__label { font-size: 15px; font-weight: 700; line-height: 1.2; }
+              .lp-btn-2x__price { font-size: 13px; opacity: 0.88; font-weight: 500; }
+            </style>
+          {%- endif -%}
+        </div>
+      {%- endform -%}
+    </product-form>
+  {%- else -%}
+    <div class="product-form">
+      <div class="product-form__buttons form">
+        <button
+          type="submit"
+          name="add"
+          class="product-form__submit button button--full-width button--primary"
+          disabled
+        >
+          {{ 'products.product.sold_out' | t }}
+        </button>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if show_pickup_availability -%}
+    {{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
+
+    {%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities
+      | where: 'pick_up_enabled', true
+    -%}
+
+    <pickup-availability
+      class="product__pickup-availabilities quick-add-hidden"
+      {% if product.selected_or_first_available_variant.available and pick_up_availabilities.size > 0 %}
+        available
+      {% endif %}
+      data-root-url="{{ routes.root_url }}"
+      data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+      data-has-only-default-variant="{{ product.has_only_default_variant }}"
+      data-product-page-color-scheme="gradient color-{{ section.settings.color_scheme }}"
+    >
+      <template>
+        <pickup-availability-preview class="pickup-availability-preview">
+          <span class="svg-wrapper">
+            {{- 'icon-unavailable.svg' | inline_asset_content -}}
+          </span>
+          <div class="pickup-availability-info">
+            <p class="caption-large">{{ 'products.product.pickup_availability.unavailable' | t }}</p>
+            <button class="pickup-availability-button link link--text underlined-link">
+              {{ 'products.product.pickup_availability.refresh' | t }}
+            </button>
+          </div>
+        </pickup-availability-preview>
+      </template>
+    </pickup-availability>
+
+    <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+
+  {%- comment -%} ── Bypass popup: ir directo a checkout sin fetch a clear.js ── {%- endcomment -%}
+  <script>
+  (function () {
+    function setupDirectCheckout() {
+      var btns = document.querySelectorAll('.product-form__submit[name="add"]');
+      btns.forEach(function (btn) {
+        if (btn.dataset.luneaCheckout) return;
+        btn.dataset.luneaCheckout = '1';
+        btn.addEventListener('click', function (e) {
+          if (btn.disabled) return;
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          var form = btn.closest('form');
+          if (!form) return;
+          var variantInput = form.querySelector('[name="id"]');
+          if (!variantInput) return;
+          btn.disabled = true;
+          btn.style.opacity = '0.7';
+          fetch('/cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: variantInput.value, quantity: 1 })
+          })
+          .then(function () {
+            window.location.href = '/checkout';
+          })
+          .catch(function () {
+            btn.disabled = false;
+            btn.style.opacity = '';
+            form.submit();
+          });
+        }, true);
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupDirectCheckout);
+    } else {
+      setupDirectCheckout();
+    }
+  })();
+  </script>
+</div>

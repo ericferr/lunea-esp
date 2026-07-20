@@ -1,0 +1,299 @@
+{
+  "name": "Lunea · Producto con kit de conversión",
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": { "type": "text", "settings": { "text": "LUNEA", "text_style": "uppercase" } },
+        "title": { "type": "title", "settings": {} },
+        "price": { "type": "price", "settings": {} },
+        "variant_picker": { "type": "variant_picker", "settings": { "picker_type": "button", "swatch_shape": "circle" } },
+        "quantity_selector": { "type": "quantity_selector", "settings": {} },
+        "buy_buttons": { "type": "buy_buttons", "settings": { "show_dynamic_checkout": false, "show_gift_card_recipient": false } },
+        "share": { "type": "share", "settings": { "share_label": "Share" } }
+      },
+      "block_order": ["vendor", "title", "price", "variant_picker", "quantity_selector", "buy_buttons", "share"],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "show",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "crosssell-go": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<style>.lp-cs-go{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#f0fafb 0%,#e8f6f8 100%);border:2px solid #0d6e82;border-radius:12px;padding:16px 20px;margin:0 auto;max-width:540px;text-decoration:none;color:inherit;transition:box-shadow .2s ease,transform .1s ease}.lp-cs-go:hover{box-shadow:0 4px 16px rgba(13,110,130,.25);transform:translateY(-1px)}.lp-cs-go__icon{font-size:26px;flex-shrink:0}.lp-cs-go__body{flex:1}.lp-cs-go__eyebrow{display:block;font-size:11px;font-weight:700;color:#0d6e82;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}.lp-cs-go__title{display:block;font-size:15px;font-weight:700;color:#1a1a1a;line-height:1.3;margin-bottom:2px}.lp-cs-go__price{display:block;font-size:13px;color:#555}.lp-cs-go__arrow{font-size:22px;color:#0d6e82;flex-shrink:0}</style><a href=\"/products/lunea-go\" class=\"lp-cs-go\"><span class=\"lp-cs-go__icon\">💰</span><span class=\"lp-cs-go__body\"><span class=\"lp-cs-go__eyebrow\">¿Buscás una opción más accesible?</span><span class=\"lp-cs-go__title\">Conocé el Lunea Go — liviana, compacta y más económica</span><span class=\"lp-cs-go__price\">Desde $149.000 · Pago contra entrega</span></span><span class=\"lp-cs-go__arrow\">→</span></a>",
+        "color_scheme": "scheme-1",
+        "padding_top": 8,
+        "padding_bottom": 0
+      }
+    },
+    "trust-row": {
+      "type": "lunea-product-trust-row",
+      "blocks": {
+        "t1": { "type": "trust", "settings": { "icon": "🚚", "text": "Envío gratis · llega en 1-5 días" } },
+        "t2": { "type": "trust", "settings": { "icon": "📦", "text": "Pago contra entrega" } },
+        "t3": { "type": "trust", "settings": { "icon": "🛡️", "text": "Garantía 30 días" } },
+        "t4": { "type": "trust", "settings": { "icon": "🔒", "text": "Compra 100% segura" } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4"],
+      "settings": {}
+    },
+    "hook": {
+      "type": "lunea-product-hook",
+      "settings": {
+        "eyebrow": "Lunea, hecho para mamás reales",
+        "title": "<p>Lactancia libre. <em>Sin pausar tu vida.</em></p>",
+        "text": "Imagina poder seguir trabajando, manejar, atender una reunión o disfrutar a tu bebé — mientras extraes leche al mismo tiempo, sin que nadie lo note. Eso es Lunea: el extractor manos libres más discreto, silencioso y cómodo del mercado colombiano."
+      }
+    },
+    "features": {
+      "type": "lunea-product-features",
+      "blocks": {
+        "b1": { "type": "feature", "settings": { "icon": "🤫", "title": "Tan silencioso que ni se nota", "text": "Funciona a menos de 60 decibeles. Úsalo en la oficina, en clase o mientras el bebé duerme — sin interrumpir nada." } },
+        "b2": { "type": "feature", "settings": { "icon": "👗", "title": "Se oculta debajo de tu ropa", "text": "Diseño ergonómico que encaja perfecto dentro de tu brasier de lactancia. Nadie sabrá que lo llevas puesto." } },
+        "b3": { "type": "feature", "settings": { "icon": "🔋", "title": "Sin cables. Sin enchufes.", "text": "Batería de larga duración recargable por USB-C — el mismo cable de tu celular. Varias sesiones con una sola carga." } },
+        "b4": { "type": "feature", "settings": { "icon": "⚙️", "title": "4 modos, tú eliges", "text": "Niveles ajustables de succión que imitan el ritmo natural del bebé. Encuentra tu intensidad perfecta." } },
+        "b5": { "type": "feature", "settings": { "icon": "🌿", "title": "100% libre de BPA", "text": "Materiales seguros para ti y tu bebé. Fácil de desensamblar y limpiar en minutos." } },
+        "b6": { "type": "feature", "settings": { "icon": "📊", "title": "Pantalla LED inteligente", "text": "Modo, intensidad y batería en tiempo real. Control total con un toque." } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6"],
+      "settings": {
+        "eyebrow": "Por qué las mamás lo eligen",
+        "title": "Diseñado para tu vida real"
+      }
+    },
+    "howto": {
+      "type": "lunea-product-howto",
+      "blocks": {
+        "s1": { "type": "step", "settings": { "title": "Colócalo en tu brasier", "text": "Inserta Lunea dentro de tu brasier de lactancia. Compatible con la mayoría de tallas." } },
+        "s2": { "type": "step", "settings": { "title": "Elige tu modo", "text": "Selecciona uno de los 4 modos en la pantalla LED y ajusta la intensidad a tu punto perfecto." } },
+        "s3": { "type": "step", "settings": { "title": "Sigue con tu vida", "text": "Camina, trabaja, descansa. Lunea hace el resto, en silencio y sin que nadie lo note." } }
+      },
+      "block_order": ["s1", "s2", "s3"],
+      "settings": {
+        "eyebrow": "Así de fácil",
+        "title": "En 3 pasos, lista para extraer"
+      }
+    },
+    "included": {
+      "type": "lunea-product-included",
+      "blocks": {
+        "i1": { "type": "item", "settings": { "text": "Extractor eléctrico Lunea (1 unidad)" } },
+        "i2": { "type": "item", "settings": { "text": "Cable de carga tipo USB-C" } },
+        "i3": { "type": "item", "settings": { "text": "Brida universal de 0.945\" (24mm) — compatible con la mayoría de tallas" } },
+        "i4": { "type": "item", "settings": { "text": "Sistema anti-reflujo integrado" } },
+        "i5": { "type": "item", "settings": { "text": "Manual rápido en español" } },
+        "i6": { "type": "item", "settings": { "text": "Soporte directo por WhatsApp — antes y después de tu compra" } }
+      },
+      "block_order": ["i1", "i2", "i3", "i4", "i5", "i6"],
+      "settings": {
+        "icon": "🎁",
+        "title": "¿Qué recibes con tu Lunea?"
+      }
+    },
+    "guarantee": {
+      "type": "lunea-product-guarantee",
+      "settings": {
+        "days": 30,
+        "title": "Tu compra está 100% protegida",
+        "text": "Si no estás satisfecha en los primeros 30 días, te devolvemos tu dinero o cambiamos tu producto sin preguntas. Solo escríbenos por WhatsApp."
+      }
+    },
+    "video-reviews": {
+      "type": "lunea-product-video-reviews",
+      "blocks": {
+        "v1": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/990d95efff8e4c34ad7340cdb91538dc.mp4",
+            "label": "Ajustás todo sin sacártelo"
+          }
+        },
+        "v2": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/f9f4aeceb822461a89ecf508caf0703e.mp4",
+            "label": "Cambio la intensidad con un dedo"
+          }
+        }
+      },
+      "block_order": ["v1", "v2"],
+      "settings": {
+        "title": "Amada por más de 5.000 mamás",
+        "ig_text": "Más de 1 millón de visitas en Instagram"
+      }
+    },
+    "real-reviews": {
+      "type": "lunea-product-real-reviews",
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0981/2574/2375/files/1.webp?v=1777436020",
+            "tag": "FOTO DEL PRODUCTO",
+            "quote": "Carga con USB-C, uso el mismo cable de mi celular",
+            "text": "No tener que andar buscando un cargador específico es una bendición. Lo enchufo con el cable de mi iPhone y listo. El diseño es súper limpio, sin botones raros que se enganchen en la ropa.",
+            "name": "Andrea M.",
+            "city": "Bogotá"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0981/2574/2375/files/3_9bbc33dd-c5f3-4b7e-979e-e79d6ab9d3f8.png?v=1777436020",
+            "tag": "RESULTADO REAL",
+            "quote": "Todo entra en el estuche y me lo llevo a todos lados",
+            "text": "El estuche que viene incluido es perfecto. Los 2 extractores entran cómodos, queda organizado y prolijo. Lo meto en la mochila junto al trabajo y nadie se da cuenta de qué es.",
+            "name": "Camila R.",
+            "city": "Medellín"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0981/2574/2375/files/4.webp?v=1777436020",
+            "tag": "RESULTADO REAL",
+            "quote": "Llegó muy bien empacado, todo organizado y listo",
+            "text": "Abrir la caja fue una experiencia en sí misma. Cada cosa en su lugar, instructivo claro, todo limpio. Lo cargué un rato y a la noche ya lo estaba usando. Cero misterio.",
+            "name": "Daniela L.",
+            "city": "Cali"
+          }
+        },
+        "r4": {
+          "type": "review",
+          "settings": {
+            "image_url": "https://cdn.shopify.com/s/files/1/0981/2574/2375/files/5.webp?v=1777436020",
+            "tag": "RESULTADO REAL",
+            "quote": "Saqué casi 180ml en una sola sesión",
+            "text": "Bombeo mientras trabajo y la cantidad que junta es impresionante. La marca de medición se ve clara — sé exactamente cuánto saqué sin tener que pasar a un biberón.",
+            "name": "Valentina P.",
+            "city": "Cartagena"
+          }
+        }
+      },
+      "block_order": ["r1", "r2", "r3", "r4"],
+      "settings": {
+        "eyebrow": "Reseñas reales",
+        "title": "Más de <em>5.000</em> mamás ya lo usan",
+        "subtitle": "Lo eligieron para no frenar su día. La oficina, los hijos, los viajes — todo sigue su curso mientras la leche se va llenando sola."
+      }
+    },
+    "testimonials": {
+      "type": "lunea-product-photo-testimonials",
+      "blocks": {
+        "pt1": { "type": "testimonial", "settings": { "name": "Mamá Camilo", "flag": "🇨🇴", "quote": "Cómodo y práctico, ideal para el día a día." } },
+        "pt2": { "type": "testimonial", "settings": { "name": "Carolina V.", "flag": "🇨🇴", "quote": "Un antes y un después, sobre todo si trabajas y quieres seguir con la lactancia." } },
+        "pt3": { "type": "testimonial", "settings": { "name": "Sofía la Madre", "flag": "🇨🇴", "quote": "Es súper cómodo y no te quita tiempo. Me simplificó un montón." } },
+        "pt4": { "type": "testimonial", "settings": { "name": "Mamá Diana", "flag": "🇨🇴", "quote": "Me sorprendió lo fácil que es de usar." } },
+        "pt5": { "type": "testimonial", "settings": { "name": "Mamá Luisa", "flag": "🇨🇴", "quote": "Lo recomiendo si buscas algo cómodo y que funcione de verdad." } },
+        "pt6": { "type": "testimonial", "settings": { "name": "Ana María M.", "flag": "🇨🇴", "quote": "Es liviano, eficiente y se adapta perfecto a tu rutina." } }
+      },
+      "block_order": ["pt1", "pt2", "pt3", "pt4", "pt5", "pt6"],
+      "settings": {
+        "title": "Elegido por mamás en Colombia"
+      }
+    },
+    "foryou": {
+      "type": "lunea-product-foryou",
+      "blocks": {
+        "y1": { "type": "item", "settings": { "text": "Necesitas extraer leche sin pausar tu rutina" } },
+        "y2": { "type": "item", "settings": { "text": "Vuelves al trabajo y no quieres complicaciones" } },
+        "y3": { "type": "item", "settings": { "text": "Buscas un extractor cómodo, discreto y silencioso" } },
+        "y4": { "type": "item", "settings": { "text": "Quieres calidad real sin pagar precios europeos" } },
+        "y5": { "type": "item", "settings": { "text": "Te importa la seguridad de los materiales que tocan tu leche" } }
+      },
+      "block_order": ["y1", "y2", "y3", "y4", "y5"],
+      "settings": {
+        "title": "Lunea es para ti si...",
+        "cta_eyebrow": "Sin riesgo · Llega en 2-5 días",
+        "cta_headline": "Pídelo hoy. Pagas cuando lo recibas.",
+        "cta_text": "Más de 500 mamás colombianas ya viven la lactancia con libertad. Es tu turno.",
+        "cta_button_text": "🛒 Quiero el mío ahora"
+      }
+    },
+    "faq": {
+      "type": "lunea-product-faq",
+      "blocks": {
+        "f1": { "type": "faq", "settings": { "question": "¿Cómo funciona el pago contra entrega?", "answer": "Haces tu pedido en línea, lo enviamos a tu casa y pagas al mensajero al recibirlo. Sin tarjetas ni transferencias previas — solo pagas cuando lo tienes en tus manos." } },
+        "f2": { "type": "faq", "settings": { "question": "¿En cuánto tiempo llega?", "answer": "Procesamos tu pedido en 24 horas hábiles. La entrega llega en 1 a 5 días hábiles según tu ciudad. Te enviamos el número de guía para que rastrees todo el camino." } },
+        "f3": { "type": "faq", "settings": { "question": "¿Qué pasa si no me funciona o no me gusta?", "answer": "Tienes 30 días de garantía completa. Si por cualquier razón no estás satisfecha, escríbenos por WhatsApp y gestionamos cambio o devolución sin complicaciones." } },
+        "f4": { "type": "faq", "settings": { "question": "¿Es compatible con mi talla de pecho?", "answer": "La brida de 24mm está diseñada para adaptarse a la mayoría de tamaños. Si tienes dudas, escríbenos por WhatsApp y te asesoramos." } },
+        "f5": { "type": "faq", "settings": { "question": "¿Es seguro comprar acá?", "answer": "Sí. Tu compra está respaldada por SSL, política de privacidad y atención humana por WhatsApp. Además puedes pagar contra entrega si prefieres no usar tarjetas en línea." } },
+        "f6": { "type": "faq", "settings": { "question": "¿Cómo me contactan después de la compra?", "answer": "Te llega un correo de confirmación con tu pedido, luego un mensaje con el número de guía cuando despachemos. Y siempre puedes escribirnos por WhatsApp para cualquier consulta." } }
+      },
+      "block_order": ["f1", "f2", "f3", "f4", "f5", "f6"],
+      "settings": {
+        "eyebrow": "Resolvemos tus dudas",
+        "title": "Preguntas frecuentes"
+      }
+    },
+    "bottom-cta": {
+      "type": "lunea-bottom-cta",
+      "settings": {
+        "eyebrow": "¿Lista para empezar?",
+        "title": "Tu lactancia merece ser libre",
+        "subtitle": "Pídelo hoy y paga cuando llegue a tu puerta. Sin riesgo, sin tarjetas.",
+        "button_text": "Comprar mi Lunea"
+      }
+    },
+    "sticky-atc": {
+      "type": "lunea-sticky-atc",
+      "settings": { "cta_text": "Comprar ahora" }
+    },
+    "whatsapp-float": {
+      "type": "lunea-whatsapp-float",
+      "settings": {
+        "phone": "5493764250518",
+        "message": "Hola, quiero más información sobre el producto."
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "También te puede gustar",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "main",
+    "crosssell-go",
+    "trust-row",
+    "hook",
+    "features",
+    "howto",
+    "included",
+    "guarantee",
+    "video-reviews",
+    "real-reviews",
+    "testimonials",
+    "foryou",
+    "faq",
+    "related-products",
+    "bottom-cta",
+    "sticky-atc",
+    "whatsapp-float"
+  ]
+}

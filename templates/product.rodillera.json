@@ -1,0 +1,153 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "stars": { "type": "star_rating", "settings": { "score": "4.8", "count": "+1.400" } },
+        "vendor": { "type": "text", "settings": { "text": "CALOR · MASAJE · COMPRESIÓN", "text_style": "uppercase" } },
+        "title": { "type": "title", "settings": {} },
+        "price": { "type": "price", "settings": {} },
+        "variant_picker": { "type": "variant_picker", "settings": { "picker_type": "button", "swatch_shape": "circle" } },
+        "quantity_selector": { "type": "quantity_selector", "settings": {} },
+        "countdown_inline": { "type": "custom_liquid", "settings": { "custom_liquid": "{% render 'lunea-countdown' %}" } },
+        "buy_buttons": { "type": "buy_buttons", "settings": { "show_dynamic_checkout": false, "show_gift_card_recipient": false } },
+        "ml_full_inline": { "type": "custom_liquid", "settings": { "custom_liquid": "{% render 'co-ml-full' %}" } },
+        "couriers_inline": { "type": "custom_liquid", "settings": { "custom_liquid": "{% render 'co-couriers' %}" } },
+        "share": { "type": "share", "settings": { "share_label": "Compartir" } }
+      },
+      "block_order": ["stars","vendor","title","price","variant_picker","quantity_selector","countdown_inline","buy_buttons","ml_full_inline","couriers_inline","share"],
+      "settings": { "enable_sticky_info": true, "color_scheme": "scheme-6", "media_size": "large", "constrain_to_viewport": true, "media_fit": "contain", "gallery_layout": "thumbnail_slider", "mobile_thumbnails": "show", "media_position": "left", "image_zoom": "lightbox", "hide_variants": true, "enable_video_looping": false, "padding_top": 36, "padding_bottom": 12 }
+    },
+    "trust-row": {
+      "type": "lunea-product-trust-row",
+      "blocks": {
+        "t1": { "type": "trust", "settings": { "icon": "🚚", "text": "Envío gratis a toda España" } },
+        "t2": { "type": "trust", "settings": { "icon": "📦", "text": "Pagas contra reembolso" } },
+        "t3": { "type": "trust", "settings": { "icon": "🔥", "text": "Calor + masaje en 15 minutos" } },
+        "t4": { "type": "trust", "settings": { "icon": "↩️", "text": "14 días para devolver" } }
+      },
+      "block_order": ["t1","t2","t3","t4"],
+      "settings": {}
+    },
+    "hook": {
+      "type": "lunea-product-hook",
+      "settings": {
+        "eyebrow": "Rodillera 3 en 1 · Calor, masaje y compresión",
+        "title": "<p>Las rodillas son lo primero que se resiente con los años. <em>Dales el descanso que piden.</em></p>",
+        "text": "Subir escaleras, estar de pie todo el día, caminar más de la cuenta o simplemente levantarte por la mañana: la zona de la rodilla acumula tensión y rigidez muscular. Esta rodillera combina tres cosas que normalmente buscarías por separado — calor envolvente, masaje por vibración y compresión suave — en una sola sesión de 15 minutos en casa, en tu sillón, sin depender de nadie ni pedir cita."
+      }
+    },
+    "features": {
+      "type": "lunea-product-features",
+      "blocks": {
+        "b1": { "type": "feature", "settings": { "icon": "🔥", "title": "Calor envolvente regulable", "text": "El calor relaja la musculatura de alrededor de la rodilla y ayuda a soltar la sensación de rigidez. Elige la intensidad que más cómoda te resulte, sin pasarte." } },
+        "b2": { "type": "feature", "settings": { "icon": "💆", "title": "Masaje por vibración", "text": "Varios modos de vibración que trabajan la zona como lo haría un masaje manual. Ideal después de caminar, del gimnasio o de un día largo de pie." } },
+        "b3": { "type": "feature", "settings": { "icon": "🤲", "title": "Compresión suave y firme", "text": "Se ajusta a la pierna con una presión envolvente que da sensación de sujeción y confort mientras la usas." } },
+        "b4": { "type": "feature", "settings": { "icon": "🔋", "title": "Inalámbrica y recargable", "text": "Sin cables colgando ni enchufes. La cargas por USB y la usas donde quieras: en el sofá, en la cama o viendo la tele." } },
+        "b5": { "type": "feature", "settings": { "icon": "📏", "title": "Ajuste universal", "text": "Las cintas se adaptan a distintos contornos de pierna, así que la puede usar cualquier persona de la casa." } },
+        "b6": { "type": "feature", "settings": { "icon": "⏱️", "title": "15 minutos y listo", "text": "Una sesión corta al día es suficiente. Te la pones, eliges el modo y sigues con lo tuyo — no tienes que parar la vida para cuidarte." } }
+      },
+      "block_order": ["b1","b2","b3","b4","b5","b6"],
+      "settings": { "eyebrow": "Por qué funciona", "title": "Tres tratamientos en un solo aparato" }
+    },
+    "howto": {
+      "type": "lunea-product-howto",
+      "blocks": {
+        "s1": { "type": "step", "settings": { "title": "Colócala y ajusta", "text": "Envuelve la rodilla con la rodillera y ajusta las cintas hasta que quede firme pero cómoda. No debe apretar." } },
+        "s2": { "type": "step", "settings": { "title": "Elige calor y masaje", "text": "Enciende y selecciona el nivel de calor y el modo de vibración que mejor te siente. Empieza suave las primeras veces." } },
+        "s3": { "type": "step", "settings": { "title": "Relájate 15 minutos", "text": "Siéntate y déjala trabajar. Se apaga sola al terminar la sesión. Puedes repetirlo a diario, sobre todo al final del día." } }
+      },
+      "block_order": ["s1","s2","s3"],
+      "settings": { "eyebrow": "Así de fácil", "title": "15 minutos al día, en tu sillón." }
+    },
+    "included": {
+      "type": "lunea-product-included",
+      "blocks": {
+        "i1": { "type": "item", "settings": { "text": "1 × Rodillera de masaje 3 en 1 (calor + vibración + compresión)" } },
+        "i2": { "type": "item", "settings": { "text": "Cable de carga USB" } },
+        "i3": { "type": "item", "settings": { "text": "Batería recargable — sin cables mientras la usas" } },
+        "i4": { "type": "item", "settings": { "text": "Niveles de calor e intensidad regulables" } },
+        "i5": { "type": "item", "settings": { "text": "Instrucciones de uso en español" } },
+        "i6": { "type": "item", "settings": { "text": "Atención por WhatsApp antes y después de tu compra" } }
+      },
+      "block_order": ["i1","i2","i3","i4","i5","i6"],
+      "settings": { "icon": "📦", "title": "¿Qué recibes?" }
+    },
+    "guarantee": {
+      "type": "lunea-product-guarantee",
+      "settings": {
+        "days": 14,
+        "title": "Compra sin riesgo",
+        "text": "Pídela hoy con total tranquilidad. Pagas contra reembolso, al mensajero, cuando el paquete llega a tu casa — sin tarjetas ni pagos por adelantado. Y como marca la ley española, tienes 14 días desde la recepción para desistir de la compra si no es lo que esperabas. Cualquier duda, nos escribes por WhatsApp."
+      }
+    },
+    "real-reviews": {
+      "type": "lunea-product-real-reviews",
+      "blocks": {
+        "r1": { "type": "review", "settings": { "image_url": "", "tag": "COMPRA VERIFICADA", "quote": "La uso cada noche y noto las piernas más descansadas", "text": "Trabajé treinta años de pie detrás de un mostrador y al llegar a casa notaba las rodillas cargadas y rígidas. Me la compró mi hija y la verdad es que la uso todas las noches viendo la tele. El calor es lo que más me gusta, se está muy a gusto y me quedo más relajada. Es cómoda de poner y no tienes que estar pendiente porque se apaga sola.", "name": "Carmen G.", "city": "Madrid" } },
+        "r2": { "type": "review", "settings": { "image_url": "", "tag": "USO DIARIO", "quote": "Perfecta después de andar o del gimnasio", "text": "Salgo a andar todos los días y a veces me pasaba de kilómetros. La uso al volver y me deja la zona mucho más suelta. Buena idea lo de que sea sin cables, me la pongo en el sofá y no tengo que estar al lado del enchufe. La batería aguanta varias sesiones. Muy contento con la compra.", "name": "Antonio R.", "city": "Sevilla" } },
+        "r3": { "type": "review", "settings": { "image_url": "", "tag": "COMPRA VERIFICADA", "quote": "Se la regalé a mi madre y la usa a diario", "text": "Buscaba algo para regalarle a mi madre que fuese fácil de usar, porque con los aparatos se lía. Esta no tiene misterio: se pone, le da al botón y ya. Le encanta el calorcito y dice que se le queda la pierna más a gusto. El pago contra reembolso me dio confianza porque no la conocía de nada.", "name": "María P.", "city": "Valencia" } },
+        "r4": { "type": "review", "settings": { "image_url": "", "tag": "USO DIARIO", "quote": "Cómoda, silenciosa y se ajusta bien", "text": "Tenía dudas con la talla porque tengo la pierna ancha, pero las cintas dan de sí y se ajusta perfectamente. Es silenciosa, así que la puedes usar mientras ves una serie sin molestar a nadie. La combinación de calor con la vibración está muy conseguida. Repetiría.", "name": "Manuel F.", "city": "Málaga" } }
+      },
+      "block_order": ["r1","r2","r3","r4"],
+      "settings": { "eyebrow": "Lo que dicen quienes ya la tienen", "title": "Opiniones reales de clientes en España", "subtitle": "Compraron con la misma ventaja que tú: pago contra reembolso, sin riesgo." }
+    },
+    "foryou": {
+      "type": "lunea-product-foryou",
+      "blocks": {
+        "y1": { "type": "item", "settings": { "text": "Notas las rodillas rígidas al levantarte o al subir escaleras" } },
+        "y2": { "type": "item", "settings": { "text": "Pasas muchas horas de pie o caminando por trabajo" } },
+        "y3": { "type": "item", "settings": { "text": "Haces deporte y quieres relajar la zona después de entrenar" } },
+        "y4": { "type": "item", "settings": { "text": "Quieres cuidarte en casa, sin depender de citas ni desplazamientos" } },
+        "y5": { "type": "item", "settings": { "text": "Buscas un regalo útil para tus padres o abuelos" } }
+      },
+      "block_order": ["y1","y2","y3","y4","y5"],
+      "settings": {
+        "title": "Esta rodillera es para ti si...",
+        "cta_eyebrow": "Sin riesgo · Pagas al recibirla",
+        "cta_headline": "Dale a tus rodillas 15 minutos al día.",
+        "cta_text": "Calor, masaje y compresión en un solo aparato inalámbrico. Envío gratis a toda España y pago contra reembolso.",
+        "cta_button_text": "🛒 La quiero ahora"
+      }
+    },
+    "faq": {
+      "type": "lunea-product-faq",
+      "blocks": {
+        "f1": { "type": "faq", "settings": { "question": "¿Cómo funciona el pago contra reembolso?", "answer": "Haces el pedido online y pagas en efectivo al mensajero cuando te entrega el paquete en casa. Sin tarjeta y sin adelantar dinero — pagas solo cuando lo tienes en tus manos." } },
+        "f2": { "type": "faq", "settings": { "question": "¿Cuánto tarda en llegar?", "answer": "Preparamos el pedido en 24 horas laborables. El envío en península tarda entre 24 y 72 horas con SEUR, Correos Express, MRW o GLS. Te enviamos el número de seguimiento para que lo sigas en todo momento." } },
+        "f3": { "type": "faq", "settings": { "question": "¿Se ajusta a cualquier pierna?", "answer": "Sí. Las cintas son regulables y se adaptan a distintos contornos, tanto para piernas delgadas como anchas. La puede usar cualquier persona de la casa." } },
+        "f4": { "type": "faq", "settings": { "question": "¿Cuánto dura la batería?", "answer": "Con una carga completa por USB aguanta varias sesiones. Como es inalámbrica, puedes usarla en el sofá o en la cama sin estar atado a un enchufe." } },
+        "f5": { "type": "faq", "settings": { "question": "¿Es un producto sanitario o un tratamiento médico?", "answer": "No. Es un aparato de masaje y bienestar para uso doméstico: aporta calor, vibración y compresión para favorecer la relajación muscular y el confort de la zona. No sustituye la consulta ni el tratamiento de un profesional sanitario. Si tienes una lesión, prótesis, problemas circulatorios, estás embarazada o llevas marcapasos, consulta antes con tu médico." } },
+        "f6": { "type": "faq", "settings": { "question": "¿Puedo devolverla si no me convence?", "answer": "Sí. Como consumidor en España tienes 14 días naturales desde que recibes el pedido para desistir de la compra. Escríbenos por WhatsApp y te indicamos cómo tramitarlo." } }
+      },
+      "block_order": ["f1","f2","f3","f4","f5","f6"],
+      "settings": { "eyebrow": "Resolvemos tus dudas", "title": "Preguntas frecuentes" }
+    },
+    "bottom-cta": {
+      "type": "lunea-bottom-cta",
+      "settings": {
+        "eyebrow": "¿Le damos un respiro a esas rodillas?",
+        "title": "Calor, masaje y compresión — en 15 minutos",
+        "subtitle": "Pídela hoy y paga cuando llegue a tu casa. Sin riesgo, sin tarjetas.",
+        "button_text": "Comprar mi rodillera"
+      }
+    },
+    "sticky-atc": { "type": "lunea-sticky-atc", "settings": { "cta_text": "Comprar ahora" } },
+    "whatsapp-float": { "type": "lunea-whatsapp-float", "settings": { "phone": "5493764250518", "message": "Hola, quiero más información sobre la rodillera de masaje." } }
+  },
+  "order": [
+    "main",
+    "trust-row",
+    "hook",
+    "features",
+    "howto",
+    "included",
+    "guarantee",
+    "real-reviews",
+    "foryou",
+    "faq",
+    "bottom-cta",
+    "sticky-atc",
+    "whatsapp-float"
+  ]
+}

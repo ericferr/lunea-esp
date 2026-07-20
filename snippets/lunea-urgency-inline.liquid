@@ -1,0 +1,91 @@
+{%- liquid
+  assign min_days = 3
+  assign max_days = 6
+  assign viewers_min = 12
+  assign viewers_max = 38
+  assign viewers_default = 23
+  assign stock_value = 12
+  assign stock_total = 50
+  assign stock_pct = stock_value | times: 100 | divided_by: stock_total
+
+  assign days_es = 'dom,lun,mar,mié,jue,vie,sáb' | split: ','
+  assign months_es = 'ene,feb,mar,abr,may,jun,jul,ago,sep,oct,nov,dic' | split: ','
+
+  assign now_ts = 'now' | date: '%s' | plus: 0
+  assign min_offset = min_days | times: 86400
+  assign max_offset = max_days | times: 86400
+  assign min_ts = now_ts | plus: min_offset
+  assign max_ts = now_ts | plus: max_offset
+
+  assign min_dow = min_ts | date: '%w' | plus: 0
+  assign min_d = min_ts | date: '%-d'
+  assign min_m_idx = min_ts | date: '%-m' | minus: 1
+  assign min_date = days_es[min_dow] | append: ' ' | append: min_d | append: ' ' | append: months_es[min_m_idx]
+
+  assign max_dow = max_ts | date: '%w' | plus: 0
+  assign max_d = max_ts | date: '%-d'
+  assign max_m_idx = max_ts | date: '%-m' | minus: 1
+  assign max_date = days_es[max_dow] | append: ' ' | append: max_d | append: ' ' | append: months_es[max_m_idx]
+-%}
+
+<style>
+  .lp-uin {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    margin: 12px 0 4px;
+    background: #EBF6FA;
+    border: 1px solid #E4E8EA;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #2E3F45;
+    display: grid;
+    gap: 6px;
+  }
+  .lp-uin__row { display: flex; align-items: center; gap: 8px; }
+  .lp-uin__pulse { width: 8px; height: 8px; border-radius: 50%; background: #1f8a55; flex-shrink: 0; position: relative; }
+  .lp-uin__pulse::after { content:''; position:absolute; inset:-3px; border-radius:50%; background:#1f8a55; opacity:.4; animation: lp-uin-pulse 1.6s ease-out infinite; }
+  @keyframes lp-uin-pulse { 0%{transform:scale(.6);opacity:.4} 100%{transform:scale(2.2);opacity:0} }
+  .lp-uin__stock { color:#b86412; font-weight:600; }
+  .lp-uin__bar { flex:1; height:4px; background:#fff; border-radius:2px; max-width:90px; overflow:hidden; }
+  .lp-uin__bar > span { display:block; height:100%; background:linear-gradient(90deg,#b86412,#c1372f); border-radius:2px; }
+  .lp-uin__eta {
+    background: #D6EEF5;
+    color: #2E3F45;
+    padding: 8px 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    line-height: 1.35;
+  }
+  .lp-uin__eta strong { font-weight: 700; color: #2E3F45; }
+</style>
+
+<div class="lp-uin" data-lp-urgency-inline>
+  <div class="lp-uin__row">
+    <span class="lp-uin__pulse" aria-hidden="true"></span>
+    <span><strong data-lp-vi>{{ viewers_default }}</strong> personas viendo ahora</span>
+  </div>
+  <div class="lp-uin__row lp-uin__stock">
+    <span aria-hidden="true">⚡</span>
+    <span>Solo quedan <strong>{{ stock_value }} unidades</strong></span>
+    <span class="lp-uin__bar"><span style="width:{{ stock_pct }}%"></span></span>
+  </div>
+  <div class="lp-uin__eta">
+    <span aria-hidden="true">📦</span>
+    <span>Recíbelo entre <strong>{{ min_date }}</strong> y <strong>{{ max_date }}</strong></span>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var el = document.querySelector('[data-lp-urgency-inline] [data-lp-vi]');
+    if (!el) return;
+    setInterval(function(){
+      var n = Math.floor(Math.random() * ({{ viewers_max }} - {{ viewers_min }} + 1)) + {{ viewers_min }};
+      el.textContent = n;
+    }, 6500);
+  })();
+</script>

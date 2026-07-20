@@ -1,0 +1,108 @@
+{{ 'lunea-product.css' | asset_url | stylesheet_tag }}
+
+{%- assign asset_filename = section.settings.asset_image_filename | strip -%}
+
+<div class="lp-section" id="lp-photo-tt" {{ section.shopify_attributes }}>
+  <div class="lp-container">
+    <div class="lp-photo-tt">
+      {%- if section.settings.show_heading -%}
+        <div class="lp-photo-tt__head">
+          {%- if section.settings.title != blank -%}
+            <h2 class="lp-photo-tt__title">{{ section.settings.title }}</h2>
+          {%- endif -%}
+          {%- if section.settings.subtitle != blank -%}
+            <p class="lp-photo-tt__subtitle">{{ section.settings.subtitle }}</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if asset_filename != blank -%}
+        <div class="lp-photo-tt__single">
+          <img
+            src="{{ asset_filename | asset_url }}"
+            alt="{{ section.settings.title | default: 'Testimonios' | escape }}"
+            loading="lazy"
+            style="width: 100%; height: auto; display: block; border-radius: 12px;"
+          >
+        </div>
+      {%- elsif section.blocks.size > 0 -%}
+        <div class="lp-photo-tt__grid">
+          {%- for block in section.blocks -%}
+            <div class="lp-photo-tt__card" {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                <div class="lp-photo-tt__media">
+                  {{ block.settings.image | image_url: width: 600 | image_tag:
+                    loading: 'lazy',
+                    width: block.settings.image.width,
+                    height: block.settings.image.height,
+                    alt: block.settings.name | default: 'Testimonio'
+                  }}
+                </div>
+              {%- endif -%}
+              {%- if block.settings.name != blank -%}
+                <span class="lp-photo-tt__name">
+                  {{ block.settings.name }}
+                  {%- if block.settings.flag != blank %} {{ block.settings.flag }}{% endif -%}
+                </span>
+              {%- endif -%}
+              {%- if block.settings.quote != blank -%}
+                <p class="lp-photo-tt__quote">“{{ block.settings.quote }}”</p>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Lunea · Reseñas con foto",
+  "tag": "section",
+  "max_blocks": 9,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Modo imagen única (recomendado)"
+    },
+    {
+      "type": "text",
+      "id": "asset_image_filename",
+      "label": "Nombre del archivo en /assets",
+      "info": "Si lo dejas en blanco, se mostrará la grilla editable con bloques.",
+      "default": "product-reviews.png"
+    },
+    {
+      "type": "header",
+      "content": "Encabezado"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_heading",
+      "label": "Mostrar título arriba de la imagen",
+      "default": false
+    },
+    { "type": "text", "id": "title", "label": "Título", "default": "Elegido por mamás en Colombia" },
+    { "type": "text", "id": "subtitle", "label": "Subtítulo (opcional)" }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonio (modo grilla)",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Foto" },
+        { "type": "text", "id": "name", "label": "Nombre", "default": "Mamá Camilo" },
+        { "type": "text", "id": "flag", "label": "Bandera (emoji)", "default": "🇨🇴" },
+        { "type": "textarea", "id": "quote", "label": "Reseña", "default": "Cómodo y práctico, ideal para el día a día." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lunea · Reseñas con foto",
+      "settings": { "asset_image_filename": "product-reviews.png" }
+    }
+  ]
+}
+{% endschema %}

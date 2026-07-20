@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "home": {
+      "type": "home-generic",
+      "blocks": {
+        "rodillera": {
+          "type": "product_card",
+          "settings": {
+            "image_url": "",
+            "name": "Rodillera de Masaje 3 en 1 con Calor",
+            "tagline": "Calor + masaje por vibración + compresión · Inalámbrica y recargable",
+            "anchor": "",
+            "price": "",
+            "url": "/products/rodillera-masaje-3-en-1",
+            "badge": "🔥 Alivio en 15 min"
+          }
+        }
+      },
+      "block_order": ["rodillera"],
+      "settings": {
+        "eyebrow": "Bienestar y descanso · España",
+        "heading": "Cuídate en casa",
+        "subheading": "Aparatos de bienestar para el día a día, con envío gratis a toda España y pago contra reembolso.",
+        "products_title": "Nuestro producto"
+      }
+    }
+  },
+  "order": ["home"]
+}
