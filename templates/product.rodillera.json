@@ -24,7 +24,7 @@
         "t1": { "type": "trust", "settings": { "icon": "🚚", "text": "Envío gratis a toda España" } },
         "t2": { "type": "trust", "settings": { "icon": "📦", "text": "Pagas contra reembolso" } },
         "t3": { "type": "trust", "settings": { "icon": "🔥", "text": "Calor + masaje en 15 minutos" } },
-        "t4": { "type": "trust", "settings": { "icon": "↩️", "text": "14 días para devolver" } }
+        "t4": { "type": "trust", "settings": { "icon": "↩️", "text": "15 días para devolver" } }
       },
       "block_order": ["t1","t2","t3","t4"],
       "settings": {}
@@ -76,9 +76,9 @@
     "guarantee": {
       "type": "lunea-product-guarantee",
       "settings": {
-        "days": 14,
+        "days": 15,
         "title": "Compra sin riesgo",
-        "text": "Pídela hoy con total tranquilidad. Pagas contra reembolso, al mensajero, cuando el paquete llega a tu casa — sin tarjetas ni pagos por adelantado. Y como marca la ley española, tienes 14 días desde la recepción para desistir de la compra si no es lo que esperabas. Cualquier duda, nos escribes por WhatsApp."
+        "text": "Pídela hoy con total tranquilidad. Pagas contra reembolso, al mensajero, cuando el paquete llega a tu casa — sin tarjetas ni pagos por adelantado. Y aunque la ley española te garantiza 14 días para desistir, nosotros te damos 15 desde que lo recibes por si no es lo que esperabas. Cualquier duda, nos escribes por WhatsApp."
       }
     },
     "real-reviews": {
@@ -118,7 +118,7 @@
         "f3": { "type": "faq", "settings": { "question": "¿Se ajusta a cualquier pierna?", "answer": "Sí. Las cintas son regulables y se adaptan a distintos contornos, tanto para piernas delgadas como anchas. La puede usar cualquier persona de la casa." } },
         "f4": { "type": "faq", "settings": { "question": "¿Cuánto dura la batería?", "answer": "Con una carga completa por USB aguanta varias sesiones. Como es inalámbrica, puedes usarla en el sofá o en la cama sin estar atado a un enchufe." } },
         "f5": { "type": "faq", "settings": { "question": "¿Es un producto sanitario o un tratamiento médico?", "answer": "No. Es un aparato de masaje y bienestar para uso doméstico: aporta calor, vibración y compresión para favorecer la relajación muscular y el confort de la zona. No sustituye la consulta ni el tratamiento de un profesional sanitario. Si tienes una lesión, prótesis, problemas circulatorios, estás embarazada o llevas marcapasos, consulta antes con tu médico." } },
-        "f6": { "type": "faq", "settings": { "question": "¿Puedo devolverla si no me convence?", "answer": "Sí. Como consumidor en España tienes 14 días naturales desde que recibes el pedido para desistir de la compra. Escríbenos por WhatsApp y te indicamos cómo tramitarlo." } }
+        "f6": { "type": "faq", "settings": { "question": "¿Puedo devolverla si no me convence?", "answer": "Sí. Como consumidor en España tienes 15 días naturales desde que recibes el pedido para devolverlo (la ley te garantiza 14, nosotros te damos uno más). Escríbenos por WhatsApp y te indicamos cómo tramitarlo." } }
       },
       "block_order": ["f1","f2","f3","f4","f5","f6"],
       "settings": { "eyebrow": "Resolvemos tus dudas", "title": "Preguntas frecuentes" }
