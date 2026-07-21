@@ -1,0 +1,73 @@
+{{ 'lunea-product.css' | asset_url | stylesheet_tag }}
+
+<div class="lp-section" {{ section.shopify_attributes }}>
+  <div class="lp-container">
+    <div class="lp-vid">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="lp-vid__eyebrow">{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="lp-vid__title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.video_url != blank -%}
+        <div class="lp-vid__media">
+          <video
+            src="{{ section.settings.video_url }}"
+            {% if section.settings.poster_url != blank %}poster="{{ section.settings.poster_url }}"{% endif %}
+            autoplay
+            muted
+            loop
+            playsinline
+            controls
+            preload="metadata"
+          ></video>
+        </div>
+      {%- endif -%}
+      {%- if section.settings.caption != blank -%}
+        <p class="lp-vid__caption">{{ section.settings.caption }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  .lp-vid { text-align: center; }
+  .lp-vid__eyebrow {
+    font-family: var(--lp-font-body, system-ui, sans-serif);
+    font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--lp-brand, #7BBDD0); font-weight: 700; margin: 0 0 8px;
+  }
+  .lp-vid__title {
+    font-family: var(--lp-font-heading, system-ui, sans-serif);
+    font-size: clamp(1.5rem, 4vw, 2.2rem); line-height: 1.2;
+    color: var(--lp-text, #2E3F45); margin: 0 auto 20px; max-width: 620px;
+  }
+  .lp-vid__media {
+    max-width: 400px; margin: 0 auto;
+    border-radius: 18px; overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,.14);
+    background: #000;
+    line-height: 0;
+  }
+  .lp-vid__media video { display: block; width: 100%; height: auto; }
+  .lp-vid__caption {
+    font-family: var(--lp-font-body, system-ui, sans-serif);
+    font-size: 15px; color: var(--lp-text-soft, #6B7E85);
+    margin: 16px auto 0; max-width: 520px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Lunea · Video",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Antetitulo", "default": "MIRALA EN ACCION" },
+    { "type": "richtext", "id": "title", "label": "Titular", "default": "<p>Asi funciona en casa</p>" },
+    { "type": "text", "id": "video_url", "label": "URL del video (mp4)" },
+    { "type": "text", "id": "poster_url", "label": "URL de la miniatura" },
+    { "type": "text", "id": "caption", "label": "Epigrafe" }
+  ],
+  "presets": [ { "name": "Lunea · Video" } ]
+}
+{% endschema %}

@@ -18,6 +18,16 @@
       "block_order": ["stars","vendor","title","price","variant_picker","quantity_selector","countdown_inline","buy_buttons","ml_full_inline","couriers_inline","share"],
       "settings": { "enable_sticky_info": true, "color_scheme": "scheme-6", "media_size": "large", "constrain_to_viewport": true, "media_fit": "contain", "gallery_layout": "thumbnail_slider", "mobile_thumbnails": "show", "media_position": "left", "image_zoom": "lightbox", "hide_variants": true, "enable_video_looping": false, "padding_top": 36, "padding_bottom": 12 }
     },
+    "video": {
+      "type": "lunea-video",
+      "settings": {
+        "eyebrow": "MÍRALA EN ACCIÓN",
+        "title": "<p>Así se usa en casa, en 15 minutos</p>",
+        "video_url": "https://cdn.shopify.com/videos/c/vp/e59c625f36124fb89fe862a82e99f944/e59c625f36124fb89fe862a82e99f944.HD-720p-1.6Mbps-89462744.mp4",
+        "poster_url": "https://cdn.shopify.com/s/files/1/0819/9166/3829/files/preview_images/e59c625f36124fb89fe862a82e99f944.thumbnail.0000000000.jpg?v=1784610045",
+        "caption": "Te la colocas, eliges calor y masaje, y te relajas. Se apaga sola al terminar."
+      }
+    },
     "trust-row": {
       "type": "lunea-product-trust-row",
       "blocks": {
@@ -137,6 +147,7 @@
   },
   "order": [
     "main",
+    "video",
     "trust-row",
     "hook",
     "features",
