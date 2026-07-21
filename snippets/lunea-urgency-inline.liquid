@@ -1,6 +1,6 @@
 {%- liquid
-  assign min_days = 3
-  assign max_days = 6
+  assign min_days = 1
+  assign max_days = 2
   assign viewers_min = 12
   assign viewers_max = 38
   assign viewers_default = 23
@@ -16,6 +16,30 @@
   assign max_offset = max_days | times: 86400
   assign min_ts = now_ts | plus: min_offset
   assign max_ts = now_ts | plus: max_offset
+
+  assign dow_check = min_ts | date: '%w' | plus: 0
+  if dow_check == 6
+    assign min_ts = min_ts | plus: 172800
+  elsif dow_check == 0
+    assign min_ts = min_ts | plus: 86400
+  endif
+
+  assign dow_check = max_ts | date: '%w' | plus: 0
+  if dow_check == 6
+    assign max_ts = max_ts | plus: 172800
+  elsif dow_check == 0
+    assign max_ts = max_ts | plus: 86400
+  endif
+
+  if max_ts <= min_ts
+    assign max_ts = min_ts | plus: 86400
+    assign dow_check = max_ts | date: '%w' | plus: 0
+    if dow_check == 6
+      assign max_ts = max_ts | plus: 172800
+    elsif dow_check == 0
+      assign max_ts = max_ts | plus: 86400
+    endif
+  endif
 
   assign min_dow = min_ts | date: '%w' | plus: 0
   assign min_d = min_ts | date: '%-d'
